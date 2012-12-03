@@ -11,6 +11,7 @@ public class Menu extends JFrame{
 	private JMenu partie = new JMenu("Partie");
 	
 	private JMenuItem nouvelle = new JMenuItem("Nouvelle partie");
+	private static Menu m;
 	
 
 	public Menu() {
@@ -28,7 +29,7 @@ public class Menu extends JFrame{
 
 	// pour tester aussi
 	public static void main (String[] args){
-		Menu m = new Menu();
+		m = new Menu();
 	}
 
 }
