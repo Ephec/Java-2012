@@ -12,32 +12,98 @@ public class Partie {
 	 * Constantes : Nombre de lignes, de collonnes et le nombre de mines en
 	 * fonction du niveau (1, 2 ou 3)
 	 */
-	
-	public static int nbLignes_Facile = 10;
-	public static int nbCols_Facile = 10;
-	public static int nbMines_Facile = 10;
-	
-	public static int nbLignes_Moyen = 15;
-	public static int nbCols_Moyen = 15;
-	public static int nbMines_Moyen = 40;
-	
-	public static int nbLignesDif = 15;
-	public static int nbColsDif = 30;
-	public static int nbMinesDif = 95;
+
+	public static final int NIVEAU_FACILE = 1;
+	public static final int NIVEAU_MOYEN = 2;
+	public static final int NIVEAU_DIF = 3;
+	public static final int NIVEAU_PERSO = 4;
+
+	public static int NB_LIGNES_FACILE = 10;
+	public static int NB_COLS_FACILE = 10;
+	public static int NB_MINES_FACILE = 10;
+
+	public static int NB_LIGNES_MOYEN = 15;
+	public static int NB_COLS_MOYEN = 15;
+	public static int NB_MINES_MOYEN = 40;
+
+	public static int NB_LIGNES_DIF = 15;
+	public static int NB_COLS_DIF = 30;
+	public static int NB_MINES_DIF = 95;
+
+	private static int nbLignes;
+	private int nbCols;
+	private int nbMines;
 
 	private int level;
 
-	public int getLevel() {
-		return level;
+	private Plateau plateau;
+
+	public Partie() {
+
+		// D'abord on choisi le niveau
+		setNiveau();
+
+		// Ensuite on crée le plateau et on initalise les cases sans mines pour
+		// permette le premier clic sur une case non minée
+		plateau = new Plateau(nbLignes, nbCols, nbMines);
+		plateau.initCases();
+		
+		// Ici il faudra mettre le premier clic et ensuite jouer
+		//
+		// Méthodes a ajouter
+		//
+		// - Gagner
+		// - Perdre
+		// - ...
+
 	}
 
-	/**
-	 * Permet de vérifier le niveau : doit être compris entre 1 et 3
-	 * 
-	 * @param level
-	 */
-	public void setLevel(int level) {
-		this.level = level;
+	public void setNiveau() {
+
+		switch (level) {
+		case NIVEAU_MOYEN:
+			setNbLignes(NB_LIGNES_MOYEN);
+			setNbLignes(NB_COLS_MOYEN);
+			setNbLignes(NB_MINES_MOYEN);
+			break;
+		case NIVEAU_DIF:
+			setNbLignes(NB_LIGNES_DIF);
+			setNbLignes(NB_COLS_DIF);
+			setNbLignes(NB_MINES_DIF);
+			break;
+		default:
+			setNbLignes(NB_LIGNES_FACILE);
+			setNbLignes(NB_COLS_FACILE);
+			setNbLignes(NB_MINES_FACILE);
+			break;
+		}
+
+	}
+
+	// Getters et Setters pour le nb de lignes, de collonnes et de mines
+
+	public int getNbLignes() {
+		return nbLignes;
+	}
+
+	public void setNbLignes(int nbLignes) {
+		this.nbLignes = nbLignes;
+	}
+
+	public int getNbCols() {
+		return nbCols;
+	}
+
+	public void setNbCols(int nbCols) {
+		this.nbCols = nbCols;
+	}
+
+	public int getNbMines() {
+		return nbMines;
+	}
+
+	public void setNbMines(int nbMines) {
+		this.nbMines = nbMines;
 	}
 
 }

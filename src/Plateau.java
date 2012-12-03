@@ -21,7 +21,7 @@ public class Plateau {
 	 * Tableau a deux dimensions qui constitue le plateau de jeu composé de
 	 * cases [i][j] ou [y][x]
 	 */
-	private Case[][] Plateau;
+	private Case[][] plateau;
 
 	// Coordonées des cases pour la création, pas besoin de protection il me
 	// semble
@@ -42,7 +42,7 @@ public class Plateau {
 		this.nbLignes = nbLignes;
 		this.nbCols = nbCols;
 		this.nbMines = nbMines;
-		Plateau = new Case[nbLignes][nbCols];
+		plateau = new Case[nbLignes][nbCols];
 	}
 
 	/**
@@ -56,10 +56,10 @@ public class Plateau {
 
 		for (int i = 0; i < nbLignes; i++) {
 			for (int j = 0; j < nbCols; j++) {
-				Plateau[i][j] = new Case(false); // ajout d'une case non
+				plateau[i][j] = new Case(false); // ajout d'une case non
 				// minée
-				Plateau[i][j].setCoordX(j); // Ajout de X
-				Plateau[i][j].setCoordY(i); // Ajout de Y
+				plateau[i][j].setCoordX(i); // Ajout de X
+				plateau[i][j].setCoordY(j); // Ajout de Y
 			}
 		}
 	}
@@ -92,7 +92,7 @@ public class Plateau {
 			col = getTabMines()[i] % this.getNbLignes();
 			if (col != x && ligne != y) {
 				// Si case n'est pas la première case selectionnée
-				Plateau[ligne][col].setMinee(true);
+				plateau[ligne][col].setMinee(true);
 			}
 
 			else {
@@ -118,7 +118,7 @@ public class Plateau {
 		for (int i = y - 1; i < y + 1; i++) {
 			for (int j = x - 1; j < x + 1; j++) {
 				if (i >= 0 && i < this.nbLignes && j >= 0 && j < this.nbCols) {
-					if (Plateau[i][j].isMinee())
+					if (plateau[i][j].isMinee())
 						nbProxi++;
 				}
 			}
@@ -138,13 +138,40 @@ public class Plateau {
 		for (int i = 0; i < nbLignes; i++) {
 			for (int j = 0; j < nbCols; j++) {
 				// Si ce n'est pas une mine, trouve les mines à proximité
-				if (!Plateau[i][j].isMinee()) {
+				if (!plateau[i][j].isMinee()) {
 					nbMines = nbMinesCase(i, j);
-					Plateau[i][j].setMinesProxi(nbMines);
+					plateau[i][j].setMinesProxi(nbMines);
 				}
 			}
 		}
 	}
+	
+	public void decouvrirCase(int x, int y){
+		plateau[x][y].setDecouvert();
+	}
+	
+	public void decouvrirAutour(int x, int y){
+        if(plateau[x][y].getMinesProxi() == 0){
+            for(int i=-1;i<=1;i++){
+                for(int j=-1;j<=1;j++){
+                    if((x+i)>= 0 && (x+i)<nbLignes && (y+j)>=0 && (y+j)<nbCols){
+                        if(
+                            plateau[x+i][y+j].getMinesProxi() == 0 &&
+                            !plateau[x+i][y+j].isDecouvert() &&
+                            !plateau[x+i][y+j].isMinee()
+                           )
+                        {
+                            decouvrirCase(x+i,y+j);
+                            decouvrirAutour(x+i,y+j);
+                        }
+                        else if(!plateau[x+i][y+j].isMinee() && !plateau[x+i][y+j].isDecouvert()){
+                            decouvrirCase(x+i,y+j);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	public int getNbLignes() {
 		return nbLignes;
