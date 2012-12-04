@@ -98,7 +98,7 @@ public class Case {
 	 * @param placerDrapeau
 	 */
 	public void setDrapeau(boolean placerDrapeau) {
-		if (this.isDecouvert() == true) {
+		if (!this.isDecouvert()) {
 			this.drapeau = placerDrapeau;
 		}
 	}

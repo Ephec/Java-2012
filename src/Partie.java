@@ -47,7 +47,7 @@ public class Partie {
 		// permette le premier clic sur une case non minée
 		plateau = new Plateau(nbLignes, nbCols, nbMines);
 		plateau.initCases();
-		
+
 		// Ici il faudra mettre le premier clic et ensuite jouer
 		//
 		// Méthodes a ajouter
@@ -58,9 +58,14 @@ public class Partie {
 
 	}
 
-	public void setNiveau() {
+	
+	/**
+	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
+	 * sera passé en paramètre à la méthode qui créer le plateau
+	 */
+	public void setNiveau(int niveau) {
 
-		switch (level) {
+		switch (niveau) {
 		case NIVEAU_MOYEN:
 			setNbLignes(NB_LIGNES_MOYEN);
 			setNbLignes(NB_COLS_MOYEN);
@@ -71,13 +76,28 @@ public class Partie {
 			setNbLignes(NB_COLS_DIF);
 			setNbLignes(NB_MINES_DIF);
 			break;
+		case NIVEAU_PERSO:
+			// Créer méthode avec niveau perso
 		default:
 			setNbLignes(NB_LIGNES_FACILE);
 			setNbLignes(NB_COLS_FACILE);
 			setNbLignes(NB_MINES_FACILE);
 			break;
 		}
+		
+		this.level = niveau;
 
+	}
+	
+	public boolean gagner(int nbMines, int nbDrapeau){
+		
+		// Si le nombre de mines correspond au nombre de case - le nombre de case découverte
+		if(plateau.getNbCaseDecou()==(plateau.getNbCases()-plateau.getNbCaseDecou())){
+			plateau.toutDecouvrir();
+			return true;
+		}
+		else return false;
+		
 	}
 
 	// Getters et Setters pour le nb de lignes, de collonnes et de mines
