@@ -40,8 +40,8 @@ public class Partie {
 
 	public Partie() {
 
-		// D'abord on choisi le niveau
-		setNiveau();
+		// D'abord on choisi le niveau, ici 1 est en exemple
+		setNiveau(1);
 
 		// Ensuite on crée le plateau et on initalise les cases sans mines pour
 		// permette le premier clic sur une case non minée
@@ -58,11 +58,12 @@ public class Partie {
 
 	}
 
-	
 	/**
 	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
-	 * sera passé en paramètre à la méthode qui créer le plateau
+	 * sera passé en paramètre à la méthode qui créer le plateau.
 	 */
+	// Dans l'interface graphique (GUI ^^ je sais), le niveau sera recu depuis
+	// une liste et sera à mon avis passé en paramètre à la fonction set
 	public void setNiveau(int niveau) {
 
 		switch (niveau) {
@@ -84,20 +85,30 @@ public class Partie {
 			setNbLignes(NB_MINES_FACILE);
 			break;
 		}
-		
+
 		this.level = niveau;
 
 	}
-	
-	public boolean gagner(int nbMines, int nbDrapeau){
-		
-		// Si le nombre de mines correspond au nombre de case - le nombre de case découverte
-		if(plateau.getNbCaseDecou()==(plateau.getNbCases()-plateau.getNbCaseDecou())){
+
+	/**
+	 * Défini ce qu'une est partie gagnée, c'est une partie dans laquelle
+	 * restantes correspondent au nombre de mines. Les drapeaux ne comptent pas,
+	 * ce sont des indications pour le joueur.
+	 * 
+	 * @param nbMines
+	 * @param nbDrapeau
+	 * @return
+	 */
+	public boolean gagner(int nbMines, int nbDrapeau) {
+
+		// Si le nombre de mines correspond au nombre de case - le nombre de
+		// case découverte
+		if (plateau.getNbCaseDecou() == (plateau.getNbCases() - plateau.getNbCaseDecou())) {
 			plateau.toutDecouvrir();
 			return true;
-		}
-		else return false;
-		
+		} else
+			return false;
+
 	}
 
 	// Getters et Setters pour le nb de lignes, de collonnes et de mines
