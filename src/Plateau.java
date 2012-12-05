@@ -19,6 +19,7 @@ public class Plateau {
 	private int nbCases;
 	private int nbDrapeau;
 	private int nbCaseDecou;
+	
 	/**
 	 * Tableau a deux dimensions qui constitue le plateau de jeu composé de
 	 * cases [i][j] ou [y][x]
