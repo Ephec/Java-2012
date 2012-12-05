@@ -1,3 +1,4 @@
+package DEMINEUR;
 // Source du dossier : http://files.codes-sources.com/fichier.aspx?id=40336
 
 public class Chrono implements Runnable

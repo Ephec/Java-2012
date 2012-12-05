@@ -1,3 +1,5 @@
+package DEMINEUR;
+
 import javax.swing.JFrame;
 
 import GUI.Menu;

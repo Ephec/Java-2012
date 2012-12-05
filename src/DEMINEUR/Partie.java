@@ -1,3 +1,5 @@
+package DEMINEUR;
+
 /**
  * Cette classe permet de générer les paramètres de la partie en tant que tel.
  * C'est-à-dire le niveau de la partie et le joueur qui y jouera.

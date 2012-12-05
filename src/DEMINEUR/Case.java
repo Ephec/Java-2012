@@ -1,3 +1,5 @@
+package DEMINEUR;
+
 /**
  * Cette classe défini les paramètres d'une case du démineur. Elle sera
  * spécialisée en fonction des attrivuts booleens "minées"
