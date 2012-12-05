@@ -1,47 +1,56 @@
 package GUI;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JFrame{
 	
-	private JMenuBar menuBar = new JMenuBar();
-	private JMenu partie = new JMenu("Partie");
-	private JMenu niveaux = new JMenu("Niveaux");
-	private JMenu options = new JMenu("Options");
-	private JMenu infos = new JMenu("?");
+	JMenuBar menuBar = new JMenuBar();
+	JMenu partie = new JMenu("Partie");
+	JMenu niveaux = new JMenu("Niveaux");
+	JMenu options = new JMenu("Options");
+	JMenu infos = new JMenu("?");
 
-	private JMenuItem nouvelle = new JMenuItem("Nouvelle partie");
-	private JMenuItem scores = new JMenuItem("Scores");
-	private JMenuItem fermer = new JMenuItem("Fermer");
+	JMenuItem nouvelle = new JMenuItem("Nouvelle partie");
+	JMenuItem reseau = new JMenuItem("Nouvelle partie en réseau");
+	JMenuItem statistiques = new JMenuItem("Statistiques");
+	JMenuItem fermer = new JMenuItem("Fermer");
 	
-	private JMenuItem facile = new JMenuItem("Facile");
-	private JMenuItem intermediaire = new JMenuItem("Intermédiaire");
-	private JMenuItem difficile = new JMenuItem("Difficile");
+	JMenuItem facile = new JMenuItem("Facile");
+	JMenuItem intermediaire = new JMenuItem("Intermédiaire");
+	JMenuItem difficile = new JMenuItem("Difficile");
+	JMenuItem personnalise = new JMenuItem("Personnalisé");
 	
-	private JMenuItem chrono = new JMenuItem("Afficher le chrono");
+	JMenuItem chrono = new JMenuItem("Afficher le chrono");
+	
+	JMenuItem apropos = new JMenuItem("A propos");
+	JMenuItem aide = new JMenuItem("Aide");
 
 	public Menu() {
-		this.setSize(500,500); // pour le test
+		
+		this.setSize(500,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
 		// Menu "Partie"
-		this.partie.add(nouvelle);
-		this.partie.add(scores);
-		this.partie.addSeparator();
+		partie.add(nouvelle);
+		partie.add(reseau);
+		partie.add(statistiques);
+		partie.addSeparator();
 
 		fermer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}        
 		});
-		this.partie.add(fermer);
+		partie.add(fermer);
 		
 		// Menu "Niveaux"
 		ButtonGroup bg = new ButtonGroup();
@@ -50,37 +59,44 @@ public class Menu extends JFrame{
 		bg.add(difficile);
 		facile.setSelected(true);
 		
-		this.niveaux.add(facile);
-		this.niveaux.add(intermediaire);
-		this.niveaux.add(difficile);
+		niveaux.add(facile);
+		niveaux.add(intermediaire);
+		niveaux.add(difficile);
+		niveaux.addSeparator();
+		niveaux.add(personnalise);
 		
 		// Menu "Options"
-		this.options.add(chrono);
+		options.add(chrono);
 		
 		// Menu "?"
-		this.infos.add("Aide");
-		this.infos.add("A propos");
+		aide.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Cliquez sur les cases sans toucher les mines ...");
+			}        
+		});
+		infos.add(aide);
+		
+		apropos.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Démineur\nVersion : décembre 2012\nBy Antoine Betas & Cédric Bremer");
+			}        
+		});
+		infos.add(apropos);
 		
 		// Barre générale qui contient les différents menu 
 		partie.setMnemonic('P');
-		this.menuBar.add(partie);
+		menuBar.add(partie);
 		niveaux.setMnemonic('N');
-		this.menuBar.add(niveaux);
+		menuBar.add(niveaux);
 		options.setMnemonic('O');
-		this.menuBar.add(options);
+		menuBar.add(options);
 		infos.setMnemonic('?');
-		this.menuBar.add(infos);
+		menuBar.add(infos);
 		
 		this.setJMenuBar(menuBar);
 		this.setVisible(true);
-
 	}
-
-	// pour tester aussi
-	public static void main (String[] args){
-		Menu m = new Menu();
-	}
-
+	
 }
 
 
