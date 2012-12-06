@@ -57,11 +57,13 @@ public class Partie {
 
 	/**
 	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
-	 * sera passé en paramètre à la méthode qui créer le plateau.
+	 * sera passé en paramètre à la méthode qui créer le plateau. De plus, cette
+	 * méthode retournera le niveau de la partie à la classe mère, Démineur ce
+	 * qui permettra de générer le niveau pour les scores
 	 */
 	// Dans l'interface graphique (GUI ^^ je sais), le niveau sera recu depuis
 	// une liste et sera à mon avis passé en paramètre à la fonction set
-	public void setNiveau(int niveau) {
+	public int setNiveau(int niveau) {
 
 		switch (niveau) {
 		case NIVEAU_MOYEN:
@@ -84,6 +86,7 @@ public class Partie {
 		}
 
 		this.level = niveau;
+		return niveau;
 
 	}
 
