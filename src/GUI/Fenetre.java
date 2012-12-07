@@ -17,6 +17,10 @@ import java.awt.event.ActionListener;
 
 import DEMINEUR.Plateau;
 
+/*
+ * GUI générale de notre démineur.
+ * (il ne faut qu'une seule classe)
+ */
 public class Fenetre extends JFrame{
 
 	private JMenuBar menuBar = new JMenuBar();
@@ -125,6 +129,9 @@ public class Fenetre extends JFrame{
 		this.setJMenuBar(menuBar);
 	}
 
+	/*
+	 * Mise en forme de la grille de jeu
+	 */
 	public void setGrille() {
 		GridLayout grille = new GridLayout(20, 20);
 		container.setLayout(grille);
