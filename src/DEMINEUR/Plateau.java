@@ -14,8 +14,8 @@ import java.util.Random;
 
 public class Plateau {
 
-	private int nbLignes;
-	private int nbCols;
+	private static int nbLignes;
+	private static int nbCols;
 	private int nbMines;
 	private int[] tabMines;
 	private int nbCases;
@@ -226,7 +226,7 @@ public class Plateau {
 		}
 	}
 
-	public int getNbLignes() {
+	public static int getNbLignes() { // Utilisé dans la GUI
 		return nbLignes;
 	}
 
@@ -234,7 +234,7 @@ public class Plateau {
 		this.nbLignes = nbLignes;
 	}
 
-	public int getNbCols() {
+	public static int getNbCols() { // // Utilisé dans la GUI
 		return nbCols;
 	}
 
