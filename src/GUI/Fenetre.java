@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JMenuItem;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
@@ -15,6 +14,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import DEMINEUR.Partie;
 import DEMINEUR.Plateau;
 
 /*
@@ -25,40 +25,35 @@ public class Fenetre extends JFrame{
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu partie = new JMenu("Partie");
-	private JMenu niveaux = new JMenu("Niveaux");
 	private JMenu options = new JMenu("Options");
 	private JMenu infos = new JMenu("?");
 	private JMenuItem nouvelle = new JMenuItem("Nouvelle partie");
 	private JMenuItem reseau = new JMenuItem("Nouvelle partie en réseau");
 	private JMenuItem statistiques = new JMenuItem("Statistiques");
 	private JMenuItem fermer = new JMenuItem("Fermer");
-	private JMenuItem facile = new JMenuItem("Facile");
-	private JMenuItem intermediaire = new JMenuItem("Intermédiaire");
-	private JMenuItem difficile = new JMenuItem("Difficile");
-	private JMenuItem personnalise = new JMenuItem("Personnalisé");
 	private JMenuItem chrono = new JMenuItem("Afficher le chrono");
 	private JMenuItem apropos = new JMenuItem("A propos");
 	private JMenuItem aide = new JMenuItem("Aide");
-	
+
 	private JPanel container = new JPanel();
 
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
 	 */
 	public Fenetre(){
-		
+
 		this.init();
 		this.setMenu();
 		this.setGrille();
 		this.setVisible(true);
 
 	}
-	
+
 	/*
 	 * Initialisation de la fenêtre par défaut
 	 */
 	public void init(){
-		
+
 		this.setTitle("Démineur en Java");
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setLocationRelativeTo(null);
@@ -66,37 +61,29 @@ public class Fenetre extends JFrame{
 		this.getContentPane().add(container, BorderLayout.CENTER);
 		container.setBackground(new java.awt.Color(255, 255, 0));
 	}
-	
+
 	/*
 	 * barre de menu
 	 */
 	public void setMenu() {
 
 		// Menu "Partie"
+		nouvelle.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}        
+		});
 		partie.add(nouvelle);
 		partie.add(reseau);
 		partie.add(statistiques);
 		partie.addSeparator();
 
 		fermer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}        
+			public void actionPerformed(ActionEvent e) {
+				choixNiveau(); 
+			}
 		});
 		partie.add(fermer);
-
-		// Menu "Niveaux"
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(facile);
-		bg.add(intermediaire);
-		bg.add(difficile);
-		facile.setSelected(true);
-
-		niveaux.add(facile);
-		niveaux.add(intermediaire);
-		niveaux.add(difficile);
-		niveaux.addSeparator();
-		niveaux.add(personnalise);
 
 		// Menu "Options"
 		options.add(chrono);
@@ -119,8 +106,6 @@ public class Fenetre extends JFrame{
 		// Barre générale qui contient les différents menu 
 		partie.setMnemonic('P');
 		menuBar.add(partie);
-		niveaux.setMnemonic('N');
-		menuBar.add(niveaux);
 		options.setMnemonic('O');
 		menuBar.add(options);
 		infos.setMnemonic('?');
@@ -129,18 +114,21 @@ public class Fenetre extends JFrame{
 		this.setJMenuBar(menuBar);
 	}
 
+	public void choixNiveau(){
+		
+	}
 	/*
 	 * Mise en forme de la grille de jeu
 	 */
 	public void setGrille() {
-		GridLayout grille = new GridLayout(20, 20);
+		GridLayout grille = new GridLayout(20 /*Plateau.getNbLignes()*/, 20 /*Plateau.getNbCols()*/);
 		container.setLayout(grille);
-		
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 20; j++) {
-				JButton button = new JButton();
-				container.add(button);
+
+		for (int i = 0; i < 20 /*Plateau.getNbLignes()*/; i++) {
+			for (int j = 0; j < 20 /*Plateau.getNbCols()*/; j++) {
+				// ??? 
 			}
 		}
 	}
+
 }

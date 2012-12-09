@@ -9,7 +9,7 @@ package DEMINEUR;
  */
 public class Case {
 
-	private int coordX; // Collonne
+	private int coordX; // Colonne
 	private int coordY; // Ligne
 
 	/**

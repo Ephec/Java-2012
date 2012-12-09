@@ -1,13 +1,13 @@
-import DEMINEUR.Demineur;
-import DEMINEUR.Partie;
-import GUI.DemineurGUI;
-import GUI.Fenetre; // Pour le test
+
+import GUI.Fenetre;
 
 public class Main {
 	
 	// La classe main est donc censée lancer tout le jeu
 	
-	Demineur d = new Demineur();
-	Fenetre f = new Fenetre();
+	public static void main(String[] args) {
 
+		Fenetre f = new Fenetre();
+		
+	}
 }

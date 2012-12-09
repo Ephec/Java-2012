@@ -3,6 +3,8 @@ package DEMINEUR;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.swing.JButton;
+
 /**
  * Cette classe crée un plateau de jeu composé d'un nombre de lignes X et de
  * collones Y en fonction du niveau. Lors du premier clic (qui ne doit pas être
@@ -26,7 +28,7 @@ public class Plateau {
 	 * Tableau a deux dimensions qui constitue le plateau de jeu composé de
 	 * cases [i][j] ou [y][x]
 	 */
-	private Case[][] plateau;
+	public static Case[][] plateau;
 
 	// Coordonées des cases pour la création, pas besoin de protection il me
 	// semble
@@ -68,6 +70,8 @@ public class Plateau {
 			}
 		}
 	}
+
+
 
 	/**
 	 * Création d'un tableau d'emplacements de mines. Tri ce ce tableau et
@@ -280,6 +284,13 @@ public class Plateau {
 
 	public void setNbCaseDecou(int nbCaseDecou) {
 		this.nbCaseDecou = nbCaseDecou;
+	}
+	public Case[][] getPlateau() {
+		return plateau;
+	}
+
+	public void setPlateau(Case[][] plateau) {
+		this.plateau = plateau;
 	}
 	
 	
