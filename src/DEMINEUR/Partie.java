@@ -32,7 +32,7 @@ public class Partie {
 	public static int NB_COLS_DIF = 30;
 	public static int NB_MINES_DIF = 95;
 
-	private static int nbLignes;
+	private int nbLignes;
 	private int nbCols;
 	private int nbMines;
 
