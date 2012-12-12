@@ -125,17 +125,10 @@ public class Fenetre extends JFrame{
 
 	public void choixNiveau(){
 		
-		
-		//Définit un titre pour notre fenêtre
-	    choixNiveau.setTitle("Sélection du niveau de jeu");
-	    //Définit sa taille : 400 pixels de large et 100 pixels de haut
-	    choixNiveau.setSize(400, 100);
-	    //Nous demandons maintenant à notre objet de se positionner au centre
-	    choixNiveau.setLocationRelativeTo(null);
-	    //Termine le processus lorsqu'on clique sur la croix rouge
-	    choixNiveau.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    //Et enfin, la rendre visible        
-	    choixNiveau.setVisible(true);
+		JOptionPane choix = new JOptionPane();
+	    String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
+	    int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
+		// Partie.setNiveau(reponse);
 		
 	}
 	/*
