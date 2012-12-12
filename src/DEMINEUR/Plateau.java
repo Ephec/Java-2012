@@ -238,7 +238,7 @@ public class Plateau {
 		this.nbLignes = nbLignes;
 	}
 
-	public static int getNbCols() { // // Utilisé dans la GUI
+	public static int getNbCols() { // Utilisé dans la GUI
 		return nbCols;
 	}
 

@@ -11,11 +11,11 @@ package DEMINEUR;
 public class Partie {
 
 	/**
-	 * Constantes : Nombre de lignes, de collonnes et le nombre de mines en
+	 * Constantes : Nombre de lignes, de colonnes et le nombre de mines en
 	 * fonction du niveau (1, 2 ou 3)
 	 */
 
-	/*public static final int NIVEAU_FACILE = 0;
+	public static final int NIVEAU_FACILE = 0;
 	public static final int NIVEAU_MOYEN = 1;
 	public static final int NIVEAU_DIF = 2;
 	public static final int NIVEAU_PERSO = 3;
@@ -31,9 +31,9 @@ public class Partie {
 	public static int NB_LIGNES_DIF = 15;
 	public static int NB_COLS_DIF = 30;
 	public static int NB_MINES_DIF = 95;
-*/
-	private int nbLignes;
-	private int nbCols;
+
+	private static int nbLignes = 15;
+	private static int nbCols = 15;
 	private int nbMines;
 
 	private int level;
@@ -131,7 +131,7 @@ public class Partie {
 
 	// Getters et Setters pour le nb de lignes, de collonnes et de mines
 
-	public int getNbLignes() {
+	public static int getNbLignes() {
 		return nbLignes;
 	}
 
@@ -139,7 +139,7 @@ public class Partie {
 		this.nbLignes = nbLignes;
 	}
 
-	public int getNbCols() {
+	public static int getNbCols() {
 		return nbCols;
 	}
 
