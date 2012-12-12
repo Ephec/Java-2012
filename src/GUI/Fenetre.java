@@ -31,7 +31,7 @@ import DEMINEUR.Plateau;
  * (il ne faut qu'une seule classe)
  */
 public class Fenetre extends JFrame{
-
+	
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu partie = new JMenu("Partie");
 	private JMenu options = new JMenu("Options");
@@ -44,7 +44,9 @@ public class Fenetre extends JFrame{
 	private JMenuItem apropos = new JMenuItem("A propos");
 	private JMenuItem aide = new JMenuItem("Aide");
 
-	private JPanel container = new JPanel();
+	JPanel container = new JPanel();
+	JTextArea details = new JTextArea("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
+	
 	JFrame choixNiveau = new JFrame();
 
 	public static int NB_LIGNES_FACILE = 10;
@@ -55,15 +57,14 @@ public class Fenetre extends JFrame{
 	public static int NB_COLS_MOYEN = 15;
 	public static int NB_MINES_MOYEN = 40;
 
-	public static int NB_LIGNES_DIF = 15;
-	public static int NB_COLS_DIF = 30;
+	public static int NB_LIGNES_DIF = 20;
+	public static int NB_COLS_DIF = 20;
 	public static int NB_MINES_DIF = 95;
 	
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
 	private static int nbMines = NB_MINES_FACILE;
 	
-	Partie jeu = new Partie();
 	
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
@@ -72,7 +73,11 @@ public class Fenetre extends JFrame{
 
 		this.init();
 		this.setMenu();
-		setGrille(nbLignes, nbCols);
+		
+		this.setGrille(nbLignes, nbCols);
+		
+		this.add(details, BorderLayout.NORTH);
+		this.pack();
 		this.setVisible(true);
 
 	}
@@ -86,8 +91,7 @@ public class Fenetre extends JFrame{
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.getContentPane().add(container);
-		//container.setBackground(new java.awt.Color(255, 255, 0));
+		details.setEditable(false);
 		
 	}
 
@@ -100,7 +104,6 @@ public class Fenetre extends JFrame{
 		nouvelle.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				choixNiveau();
-
 			}        
 		});
 		partie.add(nouvelle);
@@ -143,7 +146,7 @@ public class Fenetre extends JFrame{
 
 		this.setJMenuBar(menuBar);
 	}
-
+	
 	public void choixNiveau(){
 
 		JOptionPane choix = new JOptionPane();
@@ -183,7 +186,9 @@ public class Fenetre extends JFrame{
 			// Créer méthode avec niveau perso
 		
 		}
-		
+		System.out.println(nbLignes); //debug
+		System.out.println(nbCols); //debug
+		setGrille(nbLignes, nbCols);
 
 	}
 
@@ -192,17 +197,20 @@ public class Fenetre extends JFrame{
 	 */
 	public void setGrille(int lignes, int cols){
 		
-		this.setMinimumSize(new Dimension(500, 500));
-		this.setLayout(new GridLayout(lignes, cols));
+		this.remove(container);
+		container = new JPanel();
+		container.setLayout(new GridLayout(lignes, cols));
 		
 		for (int i = 0; i < lignes ; i++) {
 			for (int j = 0; j < cols ; j++) {
-				Case casedem = new Case(false, i, j);
-				add(casedem);
-				//Plateau.plateau[i][j].setCoordX(i); // Ajout de X
-				//Plateau.plateau[i][j].setCoordY(j); // Ajout de Y
+				Case c = new Case(false, i, j);
+				container.add(c);
 			}
 		}
+		
+		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
+		this.add(container);
+		this.pack();
 		
 	}
 
