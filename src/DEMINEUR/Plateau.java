@@ -63,10 +63,8 @@ public class Plateau {
 
 		for (int i = 0; i < nbLignes; i++) {
 			for (int j = 0; j < nbCols; j++) {
-				plateau[i][j] = new Case(false); // ajout d'une case non
+				plateau[i][j] = new Case(false,i,j); // ajout d'une case non
 				// minée
-				plateau[i][j].setCoordX(i); // Ajout de X
-				plateau[i][j].setCoordY(j); // Ajout de Y
 			}
 		}
 	}
@@ -186,6 +184,7 @@ public class Plateau {
 	public void decouvrirCase(int x, int y) {
 		plateau[x][y].setDecouvert();
 		nbCaseDecou++;
+		
 	}
 
 	/**

@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import DEMINEUR.Case;
 import DEMINEUR.Partie;
 import DEMINEUR.Plateau;
 
@@ -61,6 +62,8 @@ public class Fenetre extends JFrame{
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
 	private static int nbMines = NB_MINES_FACILE;
+	
+	Partie jeu = new Partie();
 	
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
@@ -158,7 +161,7 @@ public class Fenetre extends JFrame{
 	 * qui permettra de générer le niveau pour les scores
 	 */
 
-	public void setNiveau(int niveau) {
+	public void setNiveau(int niveau){
 		
 		switch (niveau) {
 		case 0:
@@ -194,7 +197,7 @@ public class Fenetre extends JFrame{
 		
 		for (int i = 0; i < lignes ; i++) {
 			for (int j = 0; j < cols ; j++) {
-				JButton casedem = new JButton("c");
+				Case casedem = new Case(false, i, j);
 				add(casedem);
 				//Plateau.plateau[i][j].setCoordX(i); // Ajout de X
 				//Plateau.plateau[i][j].setCoordY(j); // Ajout de Y

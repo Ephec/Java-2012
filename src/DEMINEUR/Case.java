@@ -1,5 +1,7 @@
 package DEMINEUR;
 
+import javax.swing.JButton;
+
 /**
  * Cette classe défini les paramètres d'une case du démineur. Elle sera
  * spécialisée en fonction des attrivuts booleens "minées"
@@ -7,7 +9,7 @@ package DEMINEUR;
  * @author Betas A. & Bremer C.
  * 
  */
-public class Case {
+public class Case extends JButton {
 
 	private int coordX; // Colonne
 	private int coordY; // Ligne
@@ -39,27 +41,35 @@ public class Case {
 	 * ajout ou non d'une mine comme paramètre
 	 * @param mine
 	 */
-	public Case(boolean mine) {
+	public Case(boolean mine, int X, int Y) {
 		this.decouvert = false;
 		this.drapeau = false;
 		this.minee = mine;
+		this.coordX = X;
+		this.coordY = Y;
+		String t = String.valueOf(coordX);
+		String u = String.valueOf(coordY);
+		if(this.isMinee()){
+			this.setText(t);
+		}
+		else this.setText(t+":"+u);
 	}
 
 	public int getCoordX() {
 		return coordX;
 	}
 
-	public void setCoordX(int coordX) {
-		this.coordX = coordX;
-	}
+	//public void setCoordX(int X) {
+	//	this.coordX = X;
+	//}
 
 	public int getCoordY() {
 		return coordY;
 	}
 
-	public void setCoordY(int coordY) {
-		this.coordY = coordY;
-	}
+	//public void setCoordY(int Y) {
+	//	this.coordY = Y;
+	//}
 
 	public boolean isMinee() {
 		return minee;
