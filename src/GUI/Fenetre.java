@@ -30,7 +30,7 @@ import DEMINEUR.Plateau;
  * GUI générale de notre démineur.
  * (il ne faut qu'une seule classe)
  */
-public class Fenetre extends JFrame{
+public class Fenetre extends JFrame {
 	
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu partie = new JMenu("Partie");
@@ -198,6 +198,8 @@ public class Fenetre extends JFrame{
 	public void setGrille(int lignes, int cols){
 		
 		this.remove(container);
+		
+		Plateau.initMines(nbMines, nbLignes, nbCols);
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
 		container.setLayout(new GridLayout(lignes, cols));
@@ -205,13 +207,14 @@ public class Fenetre extends JFrame{
 		for (int i = 0; i < nbLignes ; i++) {
 			for(int j = 0; j < nbCols ; j++) {
 			btnCase[i][j] = new JButton();
-			btnCase[i][j].setText("fuck");
+			btnCase[i][j].setText(" "+Plateau.mine[i][j]);
 			btnCase[i][j].setEnabled(true);
 			container.add(btnCase[i][j]);
+			
 			}
 		}
 		
-		//Plateau.initMines(nbMines, nbLignes, nbCols);
+		
 		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
 		this.add(container);
 		this.pack();

@@ -21,7 +21,7 @@ public class Plateau {
 	private static int nbLignes;
 	private static int nbCols;
 	
-	static boolean[][] minee = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+	public static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 	
 	private int[] tabMines;
 	private int nbCases;
@@ -79,18 +79,24 @@ public class Plateau {
 	 * @param x
 	 * @param y
 	 */
-	public static void initMines(int nb, int x, int y) {
+	public static void initMines(int nb, int lignes, int cols) {
 		int mines = nb;
 		
+		mine = new boolean[lignes][cols];
+		
+		for (int i = 0; i < lignes ; i++) {
+			for(int j = 0; j < cols ; j++) {
+				mine[i][j] = false;
+			}
+		}
 		while(mines > 0){
-			int coordX = (int) Math.floor(Math.random() * x);
-			int coordY = (int) Math.floor(Math.random() * y);
-			
-			//if(minee[coordX][coordY] = false){
-			//	minee[coordX][coordY] = true;
-			//	mines--;
-			//	System.out.println("x = "+ coordX + "y = "+ coordY);
-			//}
+			int coordX = (int) Math.floor(Math.random() * lignes);
+			int coordY = (int) Math.floor(Math.random() * cols);
+			System.out.println("x = "+ coordX + "y = "+ coordY);
+			if(!mine[coordX][coordY]){
+				mine[coordX][coordY] = true;
+				mines--;
+			}
 			
 		}
 		

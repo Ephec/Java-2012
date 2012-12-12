@@ -9,7 +9,7 @@ import javax.swing.JButton;
  * @author Betas A. & Bremer C.
  * 
  */
-public class Case extends JButton {
+public class Case {
 
 	private int coordX; // Colonne
 	private int coordY; // Ligne
@@ -47,12 +47,7 @@ public class Case extends JButton {
 		this.minee = false;
 		this.coordX = X;
 		this.coordY = Y;
-		String t = String.valueOf(coordX);
-		String u = String.valueOf(coordY);
-		if(this.isMinee()){
-			this.setText(t);
-		}
-		else this.setText(t+":"+u+"minée:"+minee);
+		
 	}
 
 	public int getCoordX() {
