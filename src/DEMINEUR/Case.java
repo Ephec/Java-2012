@@ -44,7 +44,7 @@ public class Case extends JButton {
 	public Case(boolean mine, int X, int Y) {
 		this.decouvert = false;
 		this.drapeau = false;
-		this.minee = mine;
+		this.minee = false;
 		this.coordX = X;
 		this.coordY = Y;
 		String t = String.valueOf(coordX);
@@ -52,7 +52,7 @@ public class Case extends JButton {
 		if(this.isMinee()){
 			this.setText(t);
 		}
-		else this.setText(t+":"+u);
+		else this.setText(t+":"+u+"minée:"+minee);
 	}
 
 	public int getCoordX() {

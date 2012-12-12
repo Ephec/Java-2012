@@ -43,6 +43,8 @@ public class Fenetre extends JFrame{
 	private JMenuItem chrono = new JMenuItem("Afficher le chrono");
 	private JMenuItem apropos = new JMenuItem("A propos");
 	private JMenuItem aide = new JMenuItem("Aide");
+	
+	JButton[][] btnCase = new JButton[nbLignes][nbCols];
 
 	JPanel container = new JPanel();
 	JTextArea details = new JTextArea("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
@@ -152,7 +154,7 @@ public class Fenetre extends JFrame{
 		JOptionPane choix = new JOptionPane();
 		String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
 		int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
-		System.out.println(reponse); //debug
+	
 		setNiveau(reponse);
 
 	}
@@ -186,8 +188,6 @@ public class Fenetre extends JFrame{
 			// Créer méthode avec niveau perso
 		
 		}
-		System.out.println(nbLignes); //debug
-		System.out.println(nbCols); //debug
 		setGrille(nbLignes, nbCols);
 
 	}
@@ -199,15 +199,19 @@ public class Fenetre extends JFrame{
 		
 		this.remove(container);
 		container = new JPanel();
+		btnCase = new JButton[nbLignes][nbCols];
 		container.setLayout(new GridLayout(lignes, cols));
 		
-		for (int i = 0; i < lignes ; i++) {
-			for (int j = 0; j < cols ; j++) {
-				Case c = new Case(false, i, j);
-				container.add(c);
+		for (int i = 0; i < nbLignes ; i++) {
+			for(int j = 0; j < nbCols ; j++) {
+			btnCase[i][j] = new JButton();
+			btnCase[i][j].setText("fuck");
+			btnCase[i][j].setEnabled(true);
+			container.add(btnCase[i][j]);
 			}
 		}
 		
+		//Plateau.initMines(nbMines, nbLignes, nbCols);
 		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
 		this.add(container);
 		this.pack();

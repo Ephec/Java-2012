@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.swing.JButton;
 
+import GUI.Fenetre;
+
 /**
  * Cette classe crée un plateau de jeu composé d'un nombre de lignes X et de
  * collones Y en fonction du niveau. Lors du premier clic (qui ne doit pas être
@@ -18,7 +20,9 @@ public class Plateau {
 
 	private static int nbLignes;
 	private static int nbCols;
-	private int nbMines;
+	
+	static boolean[][] minee = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+	
 	private int[] tabMines;
 	private int nbCases;
 	private int nbDrapeau;
@@ -46,10 +50,7 @@ public class Plateau {
 	 * @param nbMines
 	 */
 	public Plateau(int nbLignes, int nbCols, int nbMines) {
-		this.nbLignes = nbLignes;
-		this.nbCols = nbCols;
-		this.nbMines = nbMines;
-		plateau = new Case[nbLignes][nbCols];
+		
 	}
 
 	/**
@@ -78,35 +79,21 @@ public class Plateau {
 	 * @param x
 	 * @param y
 	 */
-	public void initMines(int x, int y) {
-
-		int val, ligne, col;
-
-		// Pour créer le tableau contenant les emplacements des mines
-		for (int i = 0; i < nbMines; i++) {
-			Random r = new Random();
-			val = r.nextInt(getNbCases());
-			setTabMines(i, val);
+	public static void initMines(int nb, int x, int y) {
+		int mines = nb;
+		
+		while(mines > 0){
+			int coordX = (int) Math.floor(Math.random() * x);
+			int coordY = (int) Math.floor(Math.random() * y);
+			
+			//if(minee[coordX][coordY] = false){
+			//	minee[coordX][coordY] = true;
+			//	mines--;
+			//	System.out.println("x = "+ coordX + "y = "+ coordY);
+			//}
+			
 		}
-
-		// Tri du tableau d'emplacement des mines
-		Arrays.sort(tabMines);
-
-		// Maintenant on les places dans le plateau...
-		for (int i = 0; i < nbMines; i++) {
-
-			ligne = getTabMines()[i] / this.getNbCols();
-			col = getTabMines()[i] % this.getNbLignes();
-			if (col != x && ligne != y) {
-				// Si case n'est pas la première case selectionnée
-				plateau[ligne][col].setMinee(true);
-			}
-
-			else {
-				i--;
-			}
-			// Sinon, on revient sur la mine en cours pour la placer ailleurs
-		}
+		
 
 	}
 
@@ -243,14 +230,6 @@ public class Plateau {
 
 	public void setNbCols(int nbCols) {
 		this.nbCols = nbCols;
-	}
-
-	public int getNbMines() {
-		return nbMines;
-	}
-
-	public void setNbMines(int nbMines) {
-		this.nbMines = nbMines;
 	}
 
 	public int[] getTabMines() {
