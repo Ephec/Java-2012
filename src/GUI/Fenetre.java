@@ -194,9 +194,10 @@ public class Fenetre extends JFrame{
 		
 		for (int i = 0; i < lignes ; i++) {
 			for (int j = 0; j < cols ; j++) {
-				JButton casedem = new JButton();
+				JButton casedem = new JButton("c");
 				add(casedem);
-				
+				//Plateau.plateau[i][j].setCoordX(i); // Ajout de X
+				//Plateau.plateau[i][j].setCoordY(j); // Ajout de Y
 			}
 		}
 		

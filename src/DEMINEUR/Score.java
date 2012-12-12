@@ -1,5 +1,7 @@
 package DEMINEUR;
 
+import GUI.Fenetre;
+
 public class Score {
 
 	private String nom;
@@ -24,10 +26,10 @@ public class Score {
     public String strLevel(){
         String str = "";
         switch(level){
-            case Partie.NIVEAU_FACILE: str = "Facile"; break;
-            case Partie.NIVEAU_MOYEN: str = "Moyen"; break;
-            case Partie.NIVEAU_DIF: str = "Difficile"; break;
-            case Partie.NIVEAU_PERSO: str = "Personnalisé"; break;
+            case 0: str = "Facile"; break;
+            case 1: str = "Moyen"; break;
+            case 2: str = "Difficile"; break;
+            case 3: str = "Personnalisé"; break;
         }
 
         return str;
