@@ -1,16 +1,22 @@
 package GUI;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+
 import java.awt.BorderLayout;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
@@ -118,6 +124,7 @@ public class Fenetre extends JFrame{
 	}
 
 	public void choixNiveau(){
+		
 		
 		//Définit un titre pour notre fenêtre
 	    choixNiveau.setTitle("Sélection du niveau de jeu");
