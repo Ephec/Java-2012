@@ -149,6 +149,9 @@ public class Fenetre extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 	
+	/**
+	 * Bon je commenterai tout ca plus tard :p
+	 */
 	public void choixNiveau(){
 
 		JOptionPane choix = new JOptionPane();
