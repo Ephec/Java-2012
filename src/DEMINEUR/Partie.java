@@ -15,7 +15,7 @@ public class Partie {
 	 * fonction du niveau (1, 2 ou 3)
 	 */
 
-	public static final int NIVEAU_FACILE = 0;
+	/*public static final int NIVEAU_FACILE = 0;
 	public static final int NIVEAU_MOYEN = 1;
 	public static final int NIVEAU_DIF = 2;
 	public static final int NIVEAU_PERSO = 3;
@@ -31,7 +31,7 @@ public class Partie {
 	public static int NB_LIGNES_DIF = 15;
 	public static int NB_COLS_DIF = 30;
 	public static int NB_MINES_DIF = 95;
-
+*/
 	private int nbLignes;
 	private int nbCols;
 	private int nbMines;

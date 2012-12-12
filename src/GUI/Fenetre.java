@@ -67,6 +67,10 @@ public class Fenetre extends JFrame{
 	public static int NB_LIGNES_DIF = 15;
 	public static int NB_COLS_DIF = 30;
 	public static int NB_MINES_DIF = 95;
+	
+	private int nbLignes;
+	private int nbCols;
+	private int nbMines;
 
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
@@ -89,7 +93,7 @@ public class Fenetre extends JFrame{
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getContentPane().add(container, BorderLayout.CENTER);
+		//this.getContentPane().add(container, BorderLayout.CENTER);
 		container.setBackground(new java.awt.Color(255, 255, 0));
 	}
 
@@ -160,14 +164,14 @@ public class Fenetre extends JFrame{
 	 */
 	public void setGrille( int niv ){
 		
-		setMinimumSize(new Dimension(500, 500));
-		setLayout(new GridLayout(10, 10));
+		this.setMinimumSize(new Dimension(500, 500));
+		this.setLayout(new GridLayout(10, 10));
 
-		for (int i = 0; i < 9 ; i++) {
+		for (int i = 0; i < 10 ; i++) {
 			for (int j = 0; j < 10 ; j++) {
 				JButton casedem = new JButton();
 				add(casedem);
-
+				
 			}
 		}
 
