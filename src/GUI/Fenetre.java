@@ -45,6 +45,22 @@ public class Fenetre extends JFrame{
 
 	private JPanel container = new JPanel();
 	JFrame choixNiveau = new JFrame();
+
+	public static int NB_LIGNES_FACILE = 10;
+	public static int NB_COLS_FACILE = 10;
+	public static int NB_MINES_FACILE = 10;
+
+	public static int NB_LIGNES_MOYEN = 15;
+	public static int NB_COLS_MOYEN = 15;
+	public static int NB_MINES_MOYEN = 40;
+
+	public static int NB_LIGNES_DIF = 15;
+	public static int NB_COLS_DIF = 30;
+	public static int NB_MINES_DIF = 95;
+	
+	private static int nbLignes = NB_LIGNES_FACILE;
+	private static int nbCols = NB_COLS_FACILE;
+	private static int nbMines = NB_MINES_FACILE;
 	
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
@@ -53,7 +69,7 @@ public class Fenetre extends JFrame{
 
 		this.init();
 		this.setMenu();
-		this.setGrille(1);
+		setGrille(nbLignes, nbCols);
 		this.setVisible(true);
 
 	}
@@ -67,8 +83,9 @@ public class Fenetre extends JFrame{
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.getContentPane().add(container, BorderLayout.CENTER);
-		container.setBackground(new java.awt.Color(255, 255, 0));
+		//this.getContentPane().add(container);
+		//container.setBackground(new java.awt.Color(255, 255, 0));
+		
 	}
 
 	/*
@@ -80,6 +97,7 @@ public class Fenetre extends JFrame{
 		nouvelle.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				choixNiveau();
+
 			}        
 		});
 		partie.add(nouvelle);
@@ -129,25 +147,73 @@ public class Fenetre extends JFrame{
 		String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
 		int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
 		System.out.println(reponse); //debug
+		setNiveau(reponse);
 
+	}
+	
+	/**
+	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
+	 * sera passé en paramètre à la méthode qui créer le plateau. De plus, cette
+	 * méthode retournera le niveau de la partie à la classe mère, Démineur ce
+	 * qui permettra de générer le niveau pour les scores
+	 */
+
+	public void setNiveau(int niveau) {
+		
+		switch (niveau) {
+		case 0:
+			this.nbLignes = NB_LIGNES_FACILE;
+			this.nbCols = NB_COLS_FACILE;
+			this.nbMines = NB_MINES_FACILE;
+			break;
+		case 1:
+			this.nbLignes = NB_LIGNES_MOYEN;
+			this.nbCols = NB_COLS_MOYEN;
+			this.nbMines = NB_MINES_MOYEN;
+			break;
+		case 2:
+			this.nbLignes = NB_LIGNES_DIF;
+			this.nbCols = NB_COLS_DIF;
+			this.nbMines = NB_MINES_DIF;
+			break;
+		case 3:
+			// Créer méthode avec niveau perso
+		
+		}
+		
 
 	}
 
 	/*
 	 * Mise en forme de la grille de jeu
 	 */
-	public void setGrille( int niv ){
+	public void setGrille(int lignes, int cols){
 		
 		this.setMinimumSize(new Dimension(500, 500));
-		this.setLayout(new GridLayout(Partie.getNbLignes(), Partie.getNbCols()));
-
-		for (int i = 0; i < Partie.getNbLignes() ; i++) {
-			for (int j = 0; j < Partie.getNbCols() ; j++) {
+		this.setLayout(new GridLayout(lignes, cols));
+		
+		for (int i = 0; i < lignes ; i++) {
+			for (int j = 0; j < cols ; j++) {
 				JButton casedem = new JButton();
 				add(casedem);
 				
 			}
 		}
+		
+	}
 
+	// Getters and setters
+	
+	public static int getNbLignes() {
+		return nbLignes;
+	}
+	
+	public static int getNbCols() {
+		return nbCols;
+	}
+	
+	public static int getNbMines() {
+		return nbMines;
 	}
 }
+

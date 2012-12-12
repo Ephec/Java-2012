@@ -1,5 +1,7 @@
 package DEMINEUR;
 
+import GUI.Fenetre;
+
 /**
  * Cette classe permet de générer les paramètres de la partie en tant que tel.
  * C'est-à-dire le niveau de la partie et le joueur qui y jouera.
@@ -15,78 +17,19 @@ public class Partie {
 	 * fonction du niveau (1, 2 ou 3)
 	 */
 
-	public static final int NIVEAU_FACILE = 0;
-	public static final int NIVEAU_MOYEN = 1;
-	public static final int NIVEAU_DIF = 2;
-	public static final int NIVEAU_PERSO = 3;
-
-	public static int NB_LIGNES_FACILE = 10;
-	public static int NB_COLS_FACILE = 10;
-	public static int NB_MINES_FACILE = 10;
-
-	public static int NB_LIGNES_MOYEN = 15;
-	public static int NB_COLS_MOYEN = 15;
-	public static int NB_MINES_MOYEN = 40;
-
-	public static int NB_LIGNES_DIF = 15;
-	public static int NB_COLS_DIF = 30;
-	public static int NB_MINES_DIF = 95;
-
-	private static int nbLignes = 15;
-	private static int nbCols = 15;
-	private int nbMines;
-
 	private int level;
 
 	private Plateau plateau;
 
 	public Partie() {
 
-		// D'abord on choisi le niveau, ici 1 est en exemple
-		setNiveau(1);
-
 		// Ensuite on crée le plateau et on initalise les cases sans mines pour
 		// permette le premier clic sur une case non minée
-		plateau = new Plateau(nbLignes, nbCols, nbMines);
+		plateau = new Plateau(Fenetre.getNbLignes(), Fenetre.getNbCols(), Fenetre.getNbMines());
 		plateau.initCases();
 
 		// Après l'initialisation des cases aura lieu le premier clic dans
 		// l'interface graphique je suppose. Il faut qu'on place les mines après
-
-	}
-
-	/**
-	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
-	 * sera passé en paramètre à la méthode qui créer le plateau. De plus, cette
-	 * méthode retournera le niveau de la partie à la classe mère, Démineur ce
-	 * qui permettra de générer le niveau pour les scores
-	 */
-	// Dans l'interface graphique (GUI ^^ je sais), le niveau sera recu depuis
-	// une liste et sera à mon avis passé en paramètre à la fonction set
-	public int setNiveau(int niveau) {
-
-		switch (niveau) {
-		case NIVEAU_MOYEN:
-			setNbLignes(NB_LIGNES_MOYEN);
-			setNbLignes(NB_COLS_MOYEN);
-			setNbLignes(NB_MINES_MOYEN);
-			break;
-		case NIVEAU_DIF:
-			setNbLignes(NB_LIGNES_DIF);
-			setNbLignes(NB_COLS_DIF);
-			setNbLignes(NB_MINES_DIF);
-			break;
-		case NIVEAU_PERSO:
-			// Créer méthode avec niveau perso
-		default:
-			setNbLignes(NB_LIGNES_FACILE);
-			setNbLignes(NB_COLS_FACILE);
-			setNbLignes(NB_MINES_FACILE);
-			break;
-		}
-
-		this.level = niveau;
-		return niveau;
 
 	}
 
@@ -127,32 +70,6 @@ public class Partie {
 			return true;
 		else
 			return false;
-	}
-
-	// Getters et Setters pour le nb de lignes, de collonnes et de mines
-
-	public static int getNbLignes() {
-		return nbLignes;
-	}
-
-	public void setNbLignes(int nbLignes) {
-		this.nbLignes = nbLignes;
-	}
-
-	public static int getNbCols() {
-		return nbCols;
-	}
-
-	public void setNbCols(int nbCols) {
-		this.nbCols = nbCols;
-	}
-
-	public int getNbMines() {
-		return nbMines;
-	}
-
-	public void setNbMines(int nbMines) {
-		this.nbMines = nbMines;
-	}
+	}	
 
 }
