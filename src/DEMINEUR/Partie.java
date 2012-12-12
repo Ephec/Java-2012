@@ -15,10 +15,10 @@ public class Partie {
 	 * fonction du niveau (1, 2 ou 3)
 	 */
 
-	public static final int NIVEAU_FACILE = 1;
-	public static final int NIVEAU_MOYEN = 2;
-	public static final int NIVEAU_DIF = 3;
-	public static final int NIVEAU_PERSO = 4;
+	public static final int NIVEAU_FACILE = 0;
+	public static final int NIVEAU_MOYEN = 1;
+	public static final int NIVEAU_DIF = 2;
+	public static final int NIVEAU_PERSO = 3;
 
 	public static int NB_LIGNES_FACILE = 10;
 	public static int NB_COLS_FACILE = 10;

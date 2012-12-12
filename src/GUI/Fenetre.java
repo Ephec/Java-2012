@@ -45,6 +45,28 @@ public class Fenetre extends JFrame{
 
 	private JPanel container = new JPanel();
 	JFrame choixNiveau = new JFrame();
+	
+	/**
+	 * Constantes : Nombre de lignes, de collonnes et le nombre de mines en
+	 * fonction du niveau (1, 2 ou 3)
+	 */
+
+	public static final int NIVEAU_FACILE = 0;
+	public static final int NIVEAU_MOYEN = 1;
+	public static final int NIVEAU_DIF = 2;
+	public static final int NIVEAU_PERSO = 3;
+
+	public static int NB_LIGNES_FACILE = 10;
+	public static int NB_COLS_FACILE = 10;
+	public static int NB_MINES_FACILE = 10;
+
+	public static int NB_LIGNES_MOYEN = 15;
+	public static int NB_COLS_MOYEN = 15;
+	public static int NB_MINES_MOYEN = 40;
+
+	public static int NB_LIGNES_DIF = 15;
+	public static int NB_COLS_DIF = 30;
+	public static int NB_MINES_DIF = 95;
 
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
@@ -53,7 +75,7 @@ public class Fenetre extends JFrame{
 
 		this.init();
 		this.setMenu();
-		this.setGrille();
+		this.setGrille(1);
 		this.setVisible(true);
 
 	}
@@ -124,25 +146,30 @@ public class Fenetre extends JFrame{
 	}
 
 	public void choixNiveau(){
-		
+
 		JOptionPane choix = new JOptionPane();
-	    String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
-	    int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
-		// Partie.setNiveau(reponse);
-		
+		String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
+		int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
+		System.out.println(reponse); //debug
+
+
 	}
+
 	/*
 	 * Mise en forme de la grille de jeu
 	 */
-	public void setGrille() {
-		GridLayout grille = new GridLayout(20 /*Plateau.getNbLignes()*/, 20 /*Plateau.getNbCols()*/);
-		container.setLayout(grille);
+	public void setGrille( int niv ){
+		
+		setMinimumSize(new Dimension(500, 500));
+		setLayout(new GridLayout(10, 10));
 
-		for (int i = 0; i < 20 /*Plateau.getNbLignes()*/; i++) {
-			for (int j = 0; j < 20 /*Plateau.getNbCols()*/; j++) {
-				// ??? 
+		for (int i = 0; i < 9 ; i++) {
+			for (int j = 0; j < 10 ; j++) {
+				JButton casedem = new JButton();
+				add(casedem);
+
 			}
 		}
-	}
 
+	}
 }
