@@ -122,37 +122,53 @@ public class Plateau {
 
 		nbre = new int[lignes][cols];
 		// Parcourt toutes les cases et compte le nbre de mines adjacentes en dehors des bords
-		for (int x = 1; x < lignes - 1 ; x++) {
-			for (int y = 1; y < cols - 1; y++) {
+		for (int x = 0; x < lignes ; x++) {
+			for (int y = 0; y < cols; y++) {
 
 				int nbProxi = 0;
 				
 				// le if n'est valable que si le boolean est true et donc si la case est dans au bord du tableau ça en tient compte pour ne pas compter de case inexistante
-				if(mine[x+1][y]){
-					nbProxi++;
+				if((x+1) < lignes){
+					if(mine[x+1][y]){
+						nbProxi++;
+					}
 				}
+				if((x+1) < lignes && (y-1) >=0 ){
 				if(mine[x+1][y-1]){
 					nbProxi++;
 				}
-				if(mine[x+1][y+1]){
-					nbProxi++;
 				}
-				if(mine[x-1][y]){
-					nbProxi++;
+				if((x+1) < lignes && (y+1) < cols){
+					if(mine[x+1][y+1]){
+						nbProxi++;
+					}
 				}
-				if(mine[x-1][y+1]){
-					nbProxi++;
+				if((x-1) >= 0){
+					if(mine[x-1][y]){
+						nbProxi++;
+					}
 				}
-				if(mine[x-1][y-1]){
-					nbProxi++;
+				if((x-1) >= 0 && (y+1) < cols){
+					if(mine[x-1][y+1]){
+						nbProxi++;
+					}
 				}
-				if(mine[x][y+1]){
-					nbProxi++;
+				if((x-1) >=0 && (y-1) >= 0){
+					if(mine[x-1][y-1]){
+						nbProxi++;
+					}
 				}
-				if(mine[x][y-1]){
-					nbProxi++;
+				if((y+1) < cols){
+					if(mine[x][y+1]){
+						nbProxi++;
+					}
 				}
-				
+				if((y-1) >= 0){
+					if(mine[x][y-1]){
+						nbProxi++;
+					}
+				}
+					
 				nbre[x][y] = nbProxi;
 
 			}
