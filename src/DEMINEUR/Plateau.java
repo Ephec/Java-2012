@@ -20,14 +20,23 @@ public class Plateau {
 
 	private static int nbLignes;
 	private static int nbCols;
-	
+
+	/*
+	 * Tableau 2D qui contient l'état des cases (booleen)
+	 * public pr l'instant, on verra après pr un private
+	 */
 	public static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
-	
+
+	/*
+	 * Tableau 2D qui contient le nbre de mines adjacentes à la case
+	 */
+	public static int[][] nbre = new int[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+
 	private int[] tabMines;
 	private int nbCases;
 	private int nbDrapeau;
 	private int nbCaseDecou;
-	
+
 	/**
 	 * Tableau a deux dimensions qui constitue le plateau de jeu composé de
 	 * cases [i][j] ou [y][x]
@@ -50,7 +59,7 @@ public class Plateau {
 	 * @param nbMines
 	 */
 	public Plateau(int nbLignes, int nbCols, int nbMines) {
-		
+
 	}
 
 	/**
@@ -81,26 +90,23 @@ public class Plateau {
 	 */
 	public static void initMines(int nb, int lignes, int cols) {
 		int mines = nb;
-		
 		mine = new boolean[lignes][cols];
-		
+
 		for (int i = 0; i < lignes ; i++) {
 			for(int j = 0; j < cols ; j++) {
 				mine[i][j] = false;
 			}
 		}
+
 		while(mines > 0){
-			int coordX = (int) Math.floor(Math.random() * lignes);
-			int coordY = (int) Math.floor(Math.random() * cols);
+			int coordY = (int) Math.floor(Math.random() * lignes);
+			int coordX = (int) Math.floor(Math.random() * cols);
 			System.out.println("x = "+ coordX + "y = "+ coordY);
-			if(!mine[coordX][coordY]){
-				mine[coordX][coordY] = true;
+			if(!mine[coordY][coordX]){
+				mine[coordY][coordX] = true;
 				mines--;
 			}
-			
 		}
-		
-
 	}
 
 	/**
@@ -109,22 +115,42 @@ public class Plateau {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return nbProxi
+	 * @return 
+	 * @return 
 	 */
-	public int nbMinesCase(int x, int y) {
+	public static void nbMinesCase(int lignes, int cols) {
 
-		int nbProxi = 0;
+		for (int y = 0; y < lignes; y++) {
+			for (int x = 0; x < cols; x++) {
 
-		for (int i = y - 1; i < y + 1; i++) {
-			for (int j = x - 1; j < x + 1; j++) {
-				if (i >= 0 && i < this.nbLignes && j >= 0 && j < this.nbCols) {
-					if (plateau[i][j].isMinee())
-						nbProxi++;
+				int nbProxi = 0;
+
+				boolean gauche = (x - 1) >= 0;
+				boolean droite = (x + 1) < cols;
+				boolean haut = (y - 1) >= 0;
+				boolean bas = (y + 1) < lignes;
+				
+				// le if n'est valable que si le boolean est true et donc si la case est dans au bord du tableau ça en tient compte pour ne pas compter de case inexistante
+				if(gauche){
+					
 				}
+
+				if(droite){
+
+				}
+
+				if(haut){
+
+				}
+
+				if(bas){
+
+				}
+
+
+
 			}
 		}
-
-		return nbProxi;
 
 	}
 
@@ -139,7 +165,7 @@ public class Plateau {
 			for (int j = 0; j < nbCols; j++) {
 				// Si ce n'est pas une mine, trouve les mines à proximité
 				if (!plateau[i][j].isMinee()) {
-					nbMines = nbMinesCase(i, j);
+					//nbMines = nbMinesCase(i, j);
 					plateau[i][j].setMinesProxi(nbMines);
 				}
 			}
@@ -177,7 +203,7 @@ public class Plateau {
 	public void decouvrirCase(int x, int y) {
 		plateau[x][y].setDecouvert();
 		nbCaseDecou++;
-		
+
 	}
 
 	/**
@@ -276,8 +302,8 @@ public class Plateau {
 	public void setPlateau(Case[][] plateau) {
 		this.plateau = plateau;
 	}
-	
-	
+
+
 
 	// Fin de la classe
 }

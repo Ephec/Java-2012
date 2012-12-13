@@ -210,7 +210,9 @@ public class Fenetre extends JFrame {
 		for (int i = 0; i < nbLignes ; i++) {
 			for(int j = 0; j < nbCols ; j++) {
 			btnCase[i][j] = new JButton();
-			btnCase[i][j].setText(" "+Plateau.mine[i][j]);
+			if(Plateau.mine[i][j]){
+				btnCase[i][j].setText("Mine !");
+			}
 			btnCase[i][j].setEnabled(true);
 			container.add(btnCase[i][j]);
 			
