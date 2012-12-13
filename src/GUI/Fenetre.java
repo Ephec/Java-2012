@@ -68,6 +68,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
 	private static int nbMines = NB_MINES_FACILE;
+	private static int nbMinesRest = nbMines;
 
 
 	/*
@@ -236,12 +237,15 @@ public class Fenetre extends JFrame implements MouseListener {
 		}
 
 
-		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  durée : \n");
+		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
 		this.add(container);
 		this.pack();
 
 	}
-
+	
+	/*
+	 * Classes générées automatiquement via MouseListener
+	 */
 	public void mouseClicked(MouseEvent arg0) {
 	}
 
@@ -250,21 +254,24 @@ public class Fenetre extends JFrame implements MouseListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
+		// recupère le clic (gauche ou droite)
 		int clic = e.getButton();
 
 		for(int i = 0; i < nbLignes; i++){
 			for(int j = 0; j < nbCols; j++){
-				if(e.getSource() == btnCase[i][j]){
-					if(clic == 1){
-						if(Plateau.mine[i][j]){
+				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
+					if(clic == 1){ // si clic gauche
+						if(Plateau.mine[i][j]){  // regarde si c'est une mine
 							btnCase[i][j].setText("M");
-						}else{
+						}else{ // si non, indique les mines au alentours
 							btnCase[i][j].setText(""+Plateau.nbre[i][j]);
 						}
-						btnCase[i][j].setEnabled(false);
+						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
-					if(clic == 3) {
-						btnCase[i][j].setText("D");
+					if(clic == 3) {  // si clic droit, ajout d'un drapeau
+						btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
+						nbMinesRest --;
+						details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
 					}
 				}
 			}
