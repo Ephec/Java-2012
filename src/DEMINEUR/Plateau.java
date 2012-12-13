@@ -117,20 +117,17 @@ public class Plateau {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return 
-	 * @return 
 	 */
 	public static void nbMinesCase(int lignes, int cols) {
 
 		nbre = new int[lignes][cols];
-
+		// Parcourt toutes les cases et compte le nbre de mines adjacentes en dehors des bords
 		for (int x = 1; x < lignes - 1 ; x++) {
 			for (int y = 1; y < cols - 1; y++) {
 
 				int nbProxi = 0;
-
+				
 				// le if n'est valable que si le boolean est true et donc si la case est dans au bord du tableau ça en tient compte pour ne pas compter de case inexistante
-
 				if(mine[x+1][y]){
 					nbProxi++;
 				}
@@ -156,9 +153,6 @@ public class Plateau {
 					nbProxi++;
 				}
 				
-
-
-
 				nbre[x][y] = nbProxi;
 
 			}
