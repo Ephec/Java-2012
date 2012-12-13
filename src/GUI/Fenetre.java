@@ -21,6 +21,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import DEMINEUR.Case;
 import DEMINEUR.Partie;
@@ -30,8 +32,8 @@ import DEMINEUR.Plateau;
  * GUI générale de notre démineur.
  * (il ne faut qu'une seule classe)
  */
-public class Fenetre extends JFrame {
-	
+public class Fenetre extends JFrame implements MouseListener {
+
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu partie = new JMenu("Partie");
 	private JMenu options = new JMenu("Options");
@@ -43,12 +45,12 @@ public class Fenetre extends JFrame {
 	private JMenuItem chrono = new JMenuItem("Afficher le chrono");
 	private JMenuItem apropos = new JMenuItem("A propos");
 	private JMenuItem aide = new JMenuItem("Aide");
-	
+
 	JButton[][] btnCase = new JButton[nbLignes][nbCols];
 
 	JPanel container = new JPanel();
 	JTextArea details = new JTextArea();
-	
+
 	JFrame choixNiveau = new JFrame();
 
 	public static int NB_LIGNES_FACILE = 10;
@@ -62,12 +64,12 @@ public class Fenetre extends JFrame {
 	public static int NB_LIGNES_DIF = 20;
 	public static int NB_COLS_DIF = 30;
 	public static int NB_MINES_DIF = 150;
-	
+
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
 	private static int nbMines = NB_MINES_FACILE;
-	
-	
+
+
 	/*
 	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
 	 */
@@ -75,9 +77,9 @@ public class Fenetre extends JFrame {
 
 		this.init();
 		this.setMenu();
-		
+
 		this.setGrille(nbLignes, nbCols);
-		
+
 		this.add(details, BorderLayout.NORTH);
 		this.pack();
 		this.setVisible(true);
@@ -91,11 +93,11 @@ public class Fenetre extends JFrame {
 
 		this.setTitle("Démineur en Java");
 		this.setMinimumSize(new Dimension(400, 400));
-		
+
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		details.setEditable(false);
-		
+
 	}
 
 	/*
@@ -154,7 +156,7 @@ public class Fenetre extends JFrame {
 
 		this.setJMenuBar(menuBar);
 	}
-	
+
 	/**
 	 * Bon je commenterai tout ca plus tard :p
 	 */
@@ -163,11 +165,11 @@ public class Fenetre extends JFrame {
 		JOptionPane choix = new JOptionPane();
 		String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
 		int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
-	
+
 		setNiveau(reponse);
 
 	}
-	
+
 	/**
 	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
 	 * sera passé en paramètre à la méthode qui créer le plateau. De plus, cette
@@ -176,7 +178,7 @@ public class Fenetre extends JFrame {
 	 */
 
 	public void setNiveau(int niveau){
-		
+
 		switch (niveau) {
 		case 0:
 			this.nbLignes = NB_LIGNES_FACILE;
@@ -195,7 +197,7 @@ public class Fenetre extends JFrame {
 			break;
 		case 3:
 			// Créer méthode avec niveau perso
-		
+
 		}
 		setGrille(nbLignes, nbCols);
 
@@ -205,60 +207,93 @@ public class Fenetre extends JFrame {
 	 * Mise en forme de la grille de jeu
 	 */
 	public void setGrille(int lignes, int cols){
-		
+
 		this.remove(container);
-		
+
 		Plateau.initMines(nbMines, nbLignes, nbCols);
 		Plateau.nbMinesCase(lignes, cols);
-		
+
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
-		
+
 		container.setLayout(new GridLayout(lignes, cols));
-		
+
 		for (int i = 0; i < nbLignes ; i++) {
 			for(int j = 0; j < nbCols ; j++) {
-			btnCase[i][j] = new JButton();
-			
-			if(Plateau.mine[i][j]){
-				btnCase[i][j].setText("Mine !");
-			}else{
-				btnCase[i][j].setText(""+Plateau.nbre[i][j]);
-			}
-			btnCase[i][j].setEnabled(true);
-			btnCase[i][j].setPreferredSize(new Dimension(40,40));
-			container.add(btnCase[i][j]);
-			
+				btnCase[i][j] = new JButton();
+
+				/*if(Plateau.mine[i][j]){
+					btnCase[i][j].setText("M");
+				}else{
+					btnCase[i][j].setText(""+Plateau.nbre[i][j]);
+				}*/
+				btnCase[i][j].setEnabled(true);
+				btnCase[i][j].setPreferredSize(new Dimension(45,45));
+				btnCase[i][j].addMouseListener(this);
+				container.add(btnCase[i][j]);
+
 			}
 		}
-		
-		
+
+
 		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  durée : \n");
 		this.add(container);
 		this.pack();
-		
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+
+	}
+
+	public void mouseClicked(MouseEvent arg0) {
+	}
+
+
+	public void mouseEntered(MouseEvent arg0) {
+	}
+
+	public void mousePressed(MouseEvent e) {
+		int clic = e.getButton();
+
+		for(int i = 0; i < nbLignes; i++){
+			for(int j = 0; j < nbCols; j++){
+				if(e.getSource() == btnCase[i][j]){
+					if(clic == 1){
+						if(Plateau.mine[i][j]){
+							btnCase[i][j].setText("M");
+						}else{
+							btnCase[i][j].setText(""+Plateau.nbre[i][j]);
+						}
+						btnCase[i][j].setEnabled(false);
+					}
+					if(clic == 3) {
+						btnCase[i][j].setText("D");
+					}
+				}
+			}
 		}
-		
-		
-		
+	}
+
+
+	public void mouseExited(MouseEvent arg0) {
+	}
+
+
+	public void mouseReleased(MouseEvent arg0) {
 	}
 
 	// Getters and setters
-	
+
 	public static int getNbLignes() {
 		return nbLignes;
 	}
-	
+
 	public static int getNbCols() {
 		return nbCols;
 	}
-	
+
 	public static int getNbMines() {
 		return nbMines;
 	}
+
+
+
 }
 
