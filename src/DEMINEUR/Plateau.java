@@ -101,13 +101,12 @@ public class Plateau {
 		while(mines > 0){
 			int coordX = (int) Math.floor(Math.random() * lignes);
 			int coordY = (int) Math.floor(Math.random() * cols);
-			System.out.println("x = "+ coordX + "y = "+ coordY);
+			//System.out.println("x = "+ coordX + "y = "+ coordY);
 			if(!mine[coordX][coordY]){
 				mine[coordX][coordY] = true;
 				mines--;
 			}
 		}
-
 
 	}
 
@@ -126,17 +125,17 @@ public class Plateau {
 			for (int y = 0; y < cols; y++) {
 
 				int nbProxi = 0;
-				
-				// le if n'est valable que si le boolean est true et donc si la case est dans au bord du tableau ça en tient compte pour ne pas compter de case inexistante
+
+				// si la case X+1 existe et qu'elle contient une mine, nbProxi augmente
 				if((x+1) < lignes){
 					if(mine[x+1][y]){
 						nbProxi++;
 					}
 				}
 				if((x+1) < lignes && (y-1) >=0 ){
-				if(mine[x+1][y-1]){
-					nbProxi++;
-				}
+					if(mine[x+1][y-1]){
+						nbProxi++;
+					}
 				}
 				if((x+1) < lignes && (y+1) < cols){
 					if(mine[x+1][y+1]){
@@ -168,7 +167,7 @@ public class Plateau {
 						nbProxi++;
 					}
 				}
-					
+
 				nbre[x][y] = nbProxi;
 
 			}

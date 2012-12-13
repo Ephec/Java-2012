@@ -47,7 +47,7 @@ public class Fenetre extends JFrame {
 	JButton[][] btnCase = new JButton[nbLignes][nbCols];
 
 	JPanel container = new JPanel();
-	JTextArea details = new JTextArea("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
+	JTextArea details = new JTextArea();
 	
 	JFrame choixNiveau = new JFrame();
 
@@ -56,12 +56,12 @@ public class Fenetre extends JFrame {
 	public static int NB_MINES_FACILE = 10;
 
 	public static int NB_LIGNES_MOYEN = 15;
-	public static int NB_COLS_MOYEN = 15;
+	public static int NB_COLS_MOYEN = 20;
 	public static int NB_MINES_MOYEN = 40;
 
 	public static int NB_LIGNES_DIF = 20;
-	public static int NB_COLS_DIF = 20;
-	public static int NB_MINES_DIF = 95;
+	public static int NB_COLS_DIF = 30;
+	public static int NB_MINES_DIF = 150;
 	
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
@@ -90,7 +90,8 @@ public class Fenetre extends JFrame {
 	public void init(){
 
 		this.setTitle("Démineur en Java");
-		this.setMinimumSize(new Dimension(800, 800));
+		this.setMinimumSize(new Dimension(400, 400));
+		
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		details.setEditable(false);
@@ -207,6 +208,7 @@ public class Fenetre extends JFrame {
 		
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
+		
 		container.setLayout(new GridLayout(lignes, cols));
 		
 		for (int i = 0; i < nbLignes ; i++) {
@@ -219,13 +221,14 @@ public class Fenetre extends JFrame {
 				btnCase[i][j].setText(""+Plateau.nbre[i][j]);
 			}
 			btnCase[i][j].setEnabled(true);
+			btnCase[i][j].setPreferredSize(new Dimension(40,40));
 			container.add(btnCase[i][j]);
 			
 			}
 		}
 		
 		
-		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
+		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  durée : \n");
 		this.add(container);
 		this.pack();
 		
