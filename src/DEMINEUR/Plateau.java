@@ -193,6 +193,28 @@ public class Plateau {
 			}
 		}
 	}
+	
+	// HAUT, DROITE, BAS, GAUCHE
+	public int[] isAuBord(int x, int y){
+		int[] tabBords = {0,0,0,0};
+		
+		if(x==0){
+			if (y==0) {tabBords[0]=1; tabBords[3]=1;}
+			if (y==nbCols) {tabBords[0]=1; tabBords[1]=1;}
+			else tabBords[0]=1;
+		}
+		if(x==nbLignes){
+			if (y==0) {tabBords[2]=1; tabBords[3]=1;}
+			if (y==nbCols) {tabBords[2]=1; tabBords[1]=1;}
+			else tabBords[2]=1;
+		}
+		else{
+			if (y==0) {tabBords[3]=1;}
+			if (y==nbCols) {tabBords[1]=1;}
+		}
+		System.out.println(tabBords);
+		return tabBords;
+	}
 
 	/**
 	 * Change le paramètre drapeau en true de la case en question
