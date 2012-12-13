@@ -37,9 +37,7 @@ public class Score extends JFrame{
 
 		this.setTitle("Score");
 		this.setMinimumSize(new Dimension(500, 200));
-		this.setPreferredSize(new Dimension(500,200));
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		sauverScore = new JPanel();
 		this.add(sauverScore);
 		sauverScore.setLayout(new GridLayout(4,2));

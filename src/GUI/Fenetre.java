@@ -197,11 +197,25 @@ public class Fenetre extends JFrame implements MouseListener {
 			this.nbMines = NB_MINES_DIF;
 			break;
 		case 3:
-			// Créer méthode avec niveau perso
+			this.setNivPerso();
 
 		}
 		setGrille(nbLignes, nbCols);
 
+	}
+	
+	public void setNivPerso(){
+		/*this.setTitle("Niveau personnalisé");
+		this.setMinimumSize(new Dimension(300, 200));
+		this.setLocationRelativeTo(null);
+		
+		JPanel choixNiv = new JPanel();
+		choixNiv.setLayout(new GridLayout(6,4));
+		this.add(choixNiv);
+		
+		//int lignes = JTextField();
+
+		this.setVisible(true);*/
 	}
 
 	/*
