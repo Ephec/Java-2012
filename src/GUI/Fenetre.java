@@ -111,6 +111,11 @@ public class Fenetre extends JFrame {
 		});
 		partie.add(nouvelle);
 		partie.add(reseau);
+		statistiques.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Score score = new Score();
+			}
+		});
 		partie.add(statistiques);
 		partie.addSeparator();
 
