@@ -52,7 +52,7 @@ public class Fenetre extends JFrame {
 	JFrame choixNiveau = new JFrame();
 
 	public static int NB_LIGNES_FACILE = 10;
-	public static int NB_COLS_FACILE = 10;
+	public static int NB_COLS_FACILE = 15;
 	public static int NB_MINES_FACILE = 10;
 
 	public static int NB_LIGNES_MOYEN = 15;
@@ -203,6 +203,8 @@ public class Fenetre extends JFrame {
 		this.remove(container);
 		
 		Plateau.initMines(nbMines, nbLignes, nbCols);
+		Plateau.nbMinesCase(lignes, cols);
+		
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
 		container.setLayout(new GridLayout(lignes, cols));
@@ -210,8 +212,11 @@ public class Fenetre extends JFrame {
 		for (int i = 0; i < nbLignes ; i++) {
 			for(int j = 0; j < nbCols ; j++) {
 			btnCase[i][j] = new JButton();
+			
 			if(Plateau.mine[i][j]){
 				btnCase[i][j].setText("Mine !");
+			}else{
+				btnCase[i][j].setText(""+Plateau.nbre[i][j]);
 			}
 			btnCase[i][j].setEnabled(true);
 			container.add(btnCase[i][j]);
@@ -223,6 +228,14 @@ public class Fenetre extends JFrame {
 		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMines+" \n  Plus jamais de Java pour moi ... :D \n");
 		this.add(container);
 		this.pack();
+		
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 
