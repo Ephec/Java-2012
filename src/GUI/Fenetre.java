@@ -28,9 +28,12 @@ import DEMINEUR.Case;
 import DEMINEUR.Partie;
 import DEMINEUR.Plateau;
 
-/*
- * GUI générale de notre démineur.
- * (il ne faut qu'une seule classe)
+/**
+ * 
+ * @author BETAS A. & BREMER C.
+ * 
+ * Classe générale de la fenêtre de jeu
+ *
  */
 public class Fenetre extends JFrame implements MouseListener {
 
@@ -71,8 +74,8 @@ public class Fenetre extends JFrame implements MouseListener {
 	private static int nbMinesRest = nbMines;
 
 
-	/*
-	 * Constructeur de l'interface graphique qui définit une taille, ajoute le menu et le container 
+	/**
+	 * 
 	 */
 	public Fenetre(){
 
@@ -87,8 +90,8 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	}
 
-	/*
-	 * Initialisation de la fenêtre par défaut
+	/**
+	 * Initialisation de la fenêtre
 	 */
 	public void init(){
 
@@ -109,7 +112,8 @@ public class Fenetre extends JFrame implements MouseListener {
 		// Menu "Partie"
 		nouvelle.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				choixNiveau();
+				Niveau niveau = new Niveau();
+				setNiveau(niveau.getReponse());
 			}        
 		});
 		partie.add(nouvelle);
@@ -159,19 +163,8 @@ public class Fenetre extends JFrame implements MouseListener {
 	}
 
 	/**
-	 * Bon je commenterai tout ca plus tard :p
-	 */
-	public void choixNiveau(){
-
-		JOptionPane choix = new JOptionPane();
-		String[] niv = {"Facile", "Moyen", "Difficile", "Personnalisé"};
-		int reponse = choix.showOptionDialog(null, "Veuillez choisir votre niveau pour cette partie.", "Sélection Niveau", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, niv, niv[2]);
-
-		setNiveau(reponse);
-
-	}
-
-	/**
+	 * @param niveau
+	 * 
 	 * Un switch qui en fonction du nombre entier determine le niveau. Ce niveau
 	 * sera passé en paramètre à la méthode qui créer le plateau. De plus, cette
 	 * méthode retournera le niveau de la partie à la classe mère, Démineur ce
@@ -218,8 +211,11 @@ public class Fenetre extends JFrame implements MouseListener {
 		this.setVisible(true);*/
 	}
 
-	/*
+	/**
 	 * Mise en forme de la grille de jeu
+	 * 
+	 * @param lignes
+	 * @param cols
 	 */
 	public void setGrille(int lignes, int cols){
 
