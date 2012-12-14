@@ -7,6 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -143,7 +144,7 @@ public class Fenetre extends JFrame implements MouseListener {
 		});
 		infos.add(apropos);
 
-		// Barre générale qui contient les différents menu 
+		// Barre générale
 		partie.setMnemonic('P');
 		menuBar.add(partie);
 		infos.setMnemonic('?');
@@ -229,7 +230,7 @@ public class Fenetre extends JFrame implements MouseListener {
 			for(int j = 0; j < nbCols ; j++) {
 				btnCase[i][j] = new JButton();
 				btnCase[i][j].setEnabled(true);
-				btnCase[i][j].setPreferredSize(new Dimension(45,45));
+				btnCase[i][j].setPreferredSize(new Dimension(45,45)); 
 				btnCase[i][j].addMouseListener(this);
 				container.add(btnCase[i][j]);
 			}
@@ -247,7 +248,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		String[] action = {"Recommencer", "Quitter"};
 		while(reponse == -1){
-			reponse = JOptionPane.showOptionDialog(null, "Vous avez malheureusement explosé sur un mine ...", "Partie perdue", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
+			reponse = JOptionPane.showOptionDialog(null, "Vous avez malheureusement explosé sur une mine ...", "Partie perdue", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 		}
 		
 		if(reponse == 1){
@@ -257,6 +258,10 @@ public class Fenetre extends JFrame implements MouseListener {
 			Niveau niveau = new Niveau();
 			setNiveau(niveau.getReponse());
 		}
+	}
+	
+	public void partieGagnee(){
+		// a chaque clic, on verifiera ;)
 	}
 
 	/*
@@ -293,12 +298,12 @@ public class Fenetre extends JFrame implements MouseListener {
 							}
 							
 						}
-						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
+						btnCase[i][j].setBackground(new java.awt.Color(255,255,0)); 
 						decouvertes.setDecouverte(true, i, j);
 					}
 					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
 						if(!drapeaux.getDrapeau(i,j)){
-							btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
+							btnCase[i][j].setText("D");
 							drapeaux.setDrapeau(true, i, j);
 							nbMinesRest --;
 						}
