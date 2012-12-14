@@ -1,37 +1,8 @@
 package OLD;
 
-import GUI.Fenetre;
+//anciennes methodes qui peuvent servir pour la suite 
 
-/**
- * Cette classe permet de générer les paramètres de la partie en tant que tel.
- * C'est-à-dire le niveau de la partie et le joueur qui y jouera.
- * 
- * @author Betas A. & Bremer C.
- * @see Plateau
- * 
- */
 public class Partie {
-
-	/**
-	 * Constantes : Nombre de lignes, de colonnes et le nombre de mines en
-	 * fonction du niveau (1, 2 ou 3)
-	 */
-
-	private int level;
-
-	private Plateau plateau;
-
-	public Partie() {
-
-		// Ensuite on crée le plateau et on initalise les cases sans mines pour
-		// permette le premier clic sur une case non minée
-		plateau = new Plateau(Fenetre.getNbLignes(), Fenetre.getNbCols(), Fenetre.getNbMines());
-		plateau.initCases();
-
-		// Après l'initialisation des cases aura lieu le premier clic dans
-		// l'interface graphique je suppose. Il faut qu'on place les mines après
-
-	}
 
 	/**
 	 * Défini ce qu'une est partie gagnée, c'est une partie dans laquelle les

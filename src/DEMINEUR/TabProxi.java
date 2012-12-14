@@ -5,7 +5,10 @@ import GUI.Fenetre;
 
 
 public class TabProxi {
-	
+
+	/*
+	 * Tableau 2D qui contient le nbre de mines adjacentes à la case
+	 */
 	private static int[][] nbre = new int[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 	
 	/**

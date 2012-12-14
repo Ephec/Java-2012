@@ -5,6 +5,10 @@ import GUI.Fenetre;
 
 public class TabMines {
 	
+	/*
+	 * Tableau 2D qui contient l'état des cases (booleen)
+	 * public pr l'instant, on verra après pr un private
+	 */
 	public static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 	
 	public TabMines(){
