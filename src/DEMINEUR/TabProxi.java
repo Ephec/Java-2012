@@ -10,14 +10,14 @@ public class TabProxi {
 	 * Tableau 2D qui contient le nbre de mines adjacentes à la case
 	 */
 	private static int[][] nbre = new int[Fenetre.getNbLignes()][Fenetre.getNbCols()];
-	
+
 	/**
 	 * Constructeur vide
 	 */
 	public TabProxi(){
-		
+
 	}
-	
+
 	/**
 	 * Trouve le nombre de mines à proximité d'une case en parcourant une ligne
 	 * au dessus et en dessous et une collonne à droite et a gauche.
@@ -83,6 +83,30 @@ public class TabProxi {
 
 	}
 
+	// HAUT, DROITE, BAS, GAUCHE
+	public static int[] estAuBord(int x, int y){
+		int[] tabBords = {0,0,0,0};
+
+		if(x==0){
+			if (y==0) {tabBords[0]=1; tabBords[3]=1;}
+			if (y==Fenetre.getNbCols()-1) {tabBords[0]=1; tabBords[1]=1;}
+			else tabBords[0]=1;
+		}
+		if(x==Fenetre.getNbLignes()-1){
+			if (y==0) {tabBords[2]=1; tabBords[3]=1;}
+			if (y==Fenetre.getNbCols()-1) {tabBords[2]=1; tabBords[1]=1;}
+			else tabBords[2]=1;
+		}
+		else{
+			if (y==0) {tabBords[3]=1;}
+			if (y==Fenetre.getNbCols()-1) {tabBords[1]=1;}
+		}
+		//for(int k=0; k<tabBords.length; k++){
+		//	System.out.println(tabBords[k]);
+		//}
+		return tabBords;
+	}
+
 	public static int getNbre(int x, int y) {
 		return nbre[x][y];
 	}
@@ -90,7 +114,7 @@ public class TabProxi {
 	public static void setNbre(int[][] nbre) {
 		TabProxi.nbre = nbre;
 	}
-	
-	
-	
+
+
+
 }

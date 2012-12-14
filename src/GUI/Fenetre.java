@@ -158,7 +158,6 @@ public class Fenetre extends JFrame implements MouseListener {
 	 * méthode retournera le niveau de la partie à la classe mère, Démineur ce
 	 * qui permettra de générer le niveau pour les scores
 	 */
-
 	public void setNiveau(int niveau){
 
 		switch (niveau) {
@@ -237,7 +236,6 @@ public class Fenetre extends JFrame implements MouseListener {
 			}
 		}
 
-
 		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
 		this.add(container);
 		this.pack();
@@ -268,7 +266,6 @@ public class Fenetre extends JFrame implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 	}
 
-
 	public void mouseEntered(MouseEvent arg0) {
 	}
 
@@ -280,10 +277,22 @@ public class Fenetre extends JFrame implements MouseListener {
 			for(int j = 0; j < nbCols; j++){
 				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
 					if(clic == 1){ // si clic gauche
+						
 						if(mines.getMine(i,j)){  // regarde si c'est une mine
 							partiePerdue();
+							break;
 						}else{ // si non, indique les mines au alentours
-							btnCase[i][j].setText(""+nbre.getNbre(i,j));
+							
+							int nbProxi = nbre.getNbre(i,j);
+							
+							if(nbProxi == 0){
+								btnCase[i][j].setText("");
+								
+								
+							} else {
+								btnCase[i][j].setText(""+nbre.getNbre(i,j));
+							}
+							
 						}
 						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
@@ -309,7 +318,6 @@ public class Fenetre extends JFrame implements MouseListener {
 	public void mouseExited(MouseEvent arg0) {
 	}
 
-
 	public void mouseReleased(MouseEvent arg0) {
 	}
 
@@ -326,8 +334,6 @@ public class Fenetre extends JFrame implements MouseListener {
 	public static int getNbMines() {
 		return nbMines;
 	}
-
-
 
 }
 
