@@ -57,7 +57,6 @@ public class Chrono implements Runnable
         + ":" + (dixiemeseconde / 100) % 6  + (dixiemeseconde / 10) % 10
         + ":" + dixiemeseconde % 10;
 
-	}
-	
+	}	
 
 }

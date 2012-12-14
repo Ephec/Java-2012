@@ -25,8 +25,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import DEMINEUR.Case;
-import DEMINEUR.Partie;
-import DEMINEUR.Plateau;
+import DEMINEUR.TabDrapeaux;
 import DEMINEUR.TabMines;
 import DEMINEUR.TabProxi;
 
@@ -77,6 +76,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	private TabMines mines;
 	private TabProxi nbre;
+	private TabDrapeaux drapeaux;
 
 	/**
 	 * 
@@ -289,8 +289,16 @@ public class Fenetre extends JFrame implements MouseListener {
 						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
 					if(clic == 3) {  // si clic droit, ajout d'un drapeau
-						btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
-						nbMinesRest --;
+						if(!drapeaux.getDrapeau(i,j)){
+							btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
+							drapeaux.setDrapeau(true, i, j);
+							nbMinesRest --;
+						}
+						else {
+							btnCase[i][j].setText("");
+							drapeaux.setDrapeau(false, i, j);
+							nbMinesRest ++;
+						}
 						details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
 					}
 				}

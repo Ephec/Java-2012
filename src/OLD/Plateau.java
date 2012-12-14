@@ -1,4 +1,4 @@
-package DEMINEUR;
+package OLD;
 
 import java.util.Arrays;
 import java.util.Random;

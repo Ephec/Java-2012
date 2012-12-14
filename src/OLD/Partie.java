@@ -1,4 +1,4 @@
-package DEMINEUR;
+package OLD;
 
 import GUI.Fenetre;
 
