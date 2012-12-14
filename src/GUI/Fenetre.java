@@ -27,6 +27,8 @@ import java.awt.event.MouseListener;
 import DEMINEUR.Case;
 import DEMINEUR.Partie;
 import DEMINEUR.Plateau;
+import DEMINEUR.TabMines;
+import DEMINEUR.TabProxi;
 
 /**
  * 
@@ -73,6 +75,8 @@ public class Fenetre extends JFrame implements MouseListener {
 	private static int nbMines = NB_MINES_FACILE;
 	private static int nbMinesRest = nbMines;
 
+	private TabMines mines;
+	private TabProxi nbre;
 
 	/**
 	 * 
@@ -221,11 +225,17 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		this.remove(container);
 
-		Plateau.initMines(nbMines, nbLignes, nbCols);
-		Plateau.nbMinesCase(lignes, cols);
+		//Plateau.initMines(nbMines, nbLignes, nbCols);
+		//Plateau.nbMinesCase(lignes, cols);
 
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
+		
+		TabMines mines = new TabMines();
+		TabProxi nbre = new TabProxi();
+		
+		mines.initMines(nbMines, nbLignes, nbCols);
+		nbre.nbMinesCase(lignes, cols);
 
 		container.setLayout(new GridLayout(lignes, cols));
 
@@ -271,10 +281,10 @@ public class Fenetre extends JFrame implements MouseListener {
 			for(int j = 0; j < nbCols; j++){
 				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
 					if(clic == 1){ // si clic gauche
-						if(Plateau.mine[i][j]){  // regarde si c'est une mine
+						if(mines.getMine(i,j)){  // regarde si c'est une mine
 							btnCase[i][j].setText("M");
 						}else{ // si non, indique les mines au alentours
-							btnCase[i][j].setText(""+Plateau.nbre[i][j]);
+							btnCase[i][j].setText(""+nbre.getNbre(i,j));
 						}
 						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
