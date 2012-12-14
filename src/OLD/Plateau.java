@@ -42,6 +42,8 @@ public class Plateau {
 	 * cases [i][j] ou [y][x]
 	 */
 	public static Case[][] plateau;
+	
+	//Euh...
 
 	// Coordonées des cases pour la création, pas besoin de protection il me
 	// semble
