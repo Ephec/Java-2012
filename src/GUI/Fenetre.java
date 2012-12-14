@@ -41,7 +41,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	private JMenuItem apropos = new JMenuItem("A propos");
 	private JMenuItem aide = new JMenuItem("Aide");
 
-	public JButton[][] btnCase = new JButton[nbLignes][nbCols];
+	JButton[][] btnCase = new JButton[nbLignes][nbCols];
 
 	JPanel container = new JPanel();
 	JTextArea details = new JTextArea();
@@ -221,6 +221,9 @@ public class Fenetre extends JFrame implements MouseListener {
 		TabProxi nbre = new TabProxi();
 		TabDecouvertes decouvertes = new TabDecouvertes();
 
+		mines.initMines(nbMines, nbLignes, nbCols);
+		nbre.nbMinesCase(lignes, cols);
+
 		container.setLayout(new GridLayout(lignes, cols));
 
 		for (int i = 0; i < nbLignes ; i++) {
@@ -288,19 +291,16 @@ public class Fenetre extends JFrame implements MouseListener {
 							
 							if(nbProxi == 0){
 								btnCase[i][j].setText("");
-								//decouvertes.decouvrirTab();
+								
 								
 							} else {
-								btnCase[i][j].setText(""+nbProxi);
+								btnCase[i][j].setText(""+nbre.getNbre(i,j));
 							}
 							
 						}
-						btnCase[i][j].setEnabled(false);
 						btnCase[i][j].setBackground(new java.awt.Color(150,150,150)); 
 						btnCase[i][j].setForeground(new java.awt.Color(0,0,0));
-						
-						decouvertes.setDecouverte(true, i,j);
-						
+						decouvertes.setDecouverte(true, i, j);
 					}
 					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
 						if(!drapeaux.getDrapeau(i,j)){
