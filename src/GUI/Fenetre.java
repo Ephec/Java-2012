@@ -1,22 +1,14 @@
 package GUI;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-
 import java.awt.BorderLayout;
-import java.awt.Checkbox;
-import java.awt.CheckboxGroup;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
-import java.awt.Insets;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
@@ -24,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import DEMINEUR.Case;
 import DEMINEUR.TabDrapeaux;
 import DEMINEUR.TabMines;
 import DEMINEUR.TabProxi;
@@ -40,13 +31,11 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu partie = new JMenu("Partie");
-	private JMenu options = new JMenu("Options");
 	private JMenu infos = new JMenu("?");
 	private JMenuItem nouvelle = new JMenuItem("Nouvelle partie");
 	private JMenuItem reseau = new JMenuItem("Nouvelle partie en réseau");
 	private JMenuItem statistiques = new JMenuItem("Statistiques");
 	private JMenuItem fermer = new JMenuItem("Fermer");
-	private JMenuItem chrono = new JMenuItem("Afficher le chrono");
 	private JMenuItem apropos = new JMenuItem("A propos");
 	private JMenuItem aide = new JMenuItem("Aide");
 
@@ -137,9 +126,6 @@ public class Fenetre extends JFrame implements MouseListener {
 		});
 		partie.add(fermer);
 
-		// Menu "Options"
-		options.add(chrono);
-
 		// Menu "?"
 		aide.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -158,8 +144,6 @@ public class Fenetre extends JFrame implements MouseListener {
 		// Barre générale qui contient les différents menu 
 		partie.setMnemonic('P');
 		menuBar.add(partie);
-		options.setMnemonic('O');
-		menuBar.add(options);
 		infos.setMnemonic('?');
 		menuBar.add(infos);
 
@@ -182,16 +166,19 @@ public class Fenetre extends JFrame implements MouseListener {
 			this.nbLignes = NB_LIGNES_FACILE;
 			this.nbCols = NB_COLS_FACILE;
 			this.nbMines = NB_MINES_FACILE;
+			this.nbMinesRest = nbMines;
 			break;
 		case 1:
 			this.nbLignes = NB_LIGNES_MOYEN;
 			this.nbCols = NB_COLS_MOYEN;
 			this.nbMines = NB_MINES_MOYEN;
+			this.nbMinesRest = nbMines;
 			break;
 		case 2:
 			this.nbLignes = NB_LIGNES_DIF;
 			this.nbCols = NB_COLS_DIF;
 			this.nbMines = NB_MINES_DIF;
+			this.nbMinesRest = nbMines;
 			break;
 		case 3:
 			this.setNivPerso();
@@ -200,16 +187,16 @@ public class Fenetre extends JFrame implements MouseListener {
 		setGrille(nbLignes, nbCols);
 
 	}
-	
+
 	public void setNivPerso(){
 		/*this.setTitle("Niveau personnalisé");
 		this.setMinimumSize(new Dimension(300, 200));
 		this.setLocationRelativeTo(null);
-		
+
 		JPanel choixNiv = new JPanel();
 		choixNiv.setLayout(new GridLayout(6,4));
 		this.add(choixNiv);
-		
+
 		//int lignes = JTextField();
 
 		this.setVisible(true);*/
@@ -230,10 +217,10 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
-		
+
 		TabMines mines = new TabMines();
 		TabProxi nbre = new TabProxi();
-		
+
 		mines.initMines(nbMines, nbLignes, nbCols);
 		nbre.nbMinesCase(lignes, cols);
 
@@ -242,12 +229,6 @@ public class Fenetre extends JFrame implements MouseListener {
 		for (int i = 0; i < nbLignes ; i++) {
 			for(int j = 0; j < nbCols ; j++) {
 				btnCase[i][j] = new JButton();
-
-				/*if(Plateau.mine[i][j]){
-					btnCase[i][j].setText("M");
-				}else{
-					btnCase[i][j].setText(""+Plateau.nbre[i][j]);
-				}*/
 				btnCase[i][j].setEnabled(true);
 				btnCase[i][j].setPreferredSize(new Dimension(45,45));
 				btnCase[i][j].addMouseListener(this);
@@ -262,7 +243,25 @@ public class Fenetre extends JFrame implements MouseListener {
 		this.pack();
 
 	}
-	
+
+	public void partiePerdue() {
+
+		int reponse = -1;
+
+		String[] action = {"Recommencer", "Quitter"};
+		while(reponse == -1){
+			reponse = JOptionPane.showOptionDialog(null, "Vous avez malheureusement explosé sur un mine ...", "Partie perdue", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
+		}
+		
+		if(reponse == 1){
+			System.exit(0);
+		}
+		if(reponse == 0){
+			Niveau niveau = new Niveau();
+			setNiveau(niveau.getReponse());
+		}
+	}
+
 	/*
 	 * Classes générées automatiquement via MouseListener
 	 */
@@ -282,7 +281,7 @@ public class Fenetre extends JFrame implements MouseListener {
 				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
 					if(clic == 1){ // si clic gauche
 						if(mines.getMine(i,j)){  // regarde si c'est une mine
-							btnCase[i][j].setText("M");
+							partiePerdue();
 						}else{ // si non, indique les mines au alentours
 							btnCase[i][j].setText(""+nbre.getNbre(i,j));
 						}
