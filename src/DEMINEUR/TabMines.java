@@ -9,7 +9,7 @@ public class TabMines {
 	 * Tableau 2D qui contient l'état des cases (booleen)
 	 * public pr l'instant, on verra après pr un private
 	 */
-	public static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+	private static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 	
 	public TabMines(){
 		
@@ -26,7 +26,6 @@ public class TabMines {
 	 */
 	public static void initMines(int nb, int lignes, int cols) {
 		int mines = nb;
-		mine = new boolean[lignes][cols];
 
 		for (int i = 0; i < lignes ; i++) {
 			for(int j = 0; j < cols ; j++) {

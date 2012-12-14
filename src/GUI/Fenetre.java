@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import DEMINEUR.TabDecouvertes;
 import DEMINEUR.TabDrapeaux;
 import DEMINEUR.TabMines;
 import DEMINEUR.TabProxi;
@@ -66,6 +67,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	private TabMines mines;
 	private TabProxi nbre;
 	private TabDrapeaux drapeaux;
+	private TabDecouvertes decouvertes;
 
 	/**
 	 * 
@@ -211,14 +213,12 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		this.remove(container);
 
-		//Plateau.initMines(nbMines, nbLignes, nbCols);
-		//Plateau.nbMinesCase(lignes, cols);
-
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
 
 		TabMines mines = new TabMines();
 		TabProxi nbre = new TabProxi();
+		TabDecouvertes decouvertes = new TabDecouvertes();
 
 		mines.initMines(nbMines, nbLignes, nbCols);
 		nbre.nbMinesCase(lignes, cols);
@@ -232,7 +232,6 @@ public class Fenetre extends JFrame implements MouseListener {
 				btnCase[i][j].setPreferredSize(new Dimension(45,45));
 				btnCase[i][j].addMouseListener(this);
 				container.add(btnCase[i][j]);
-
 			}
 		}
 
@@ -295,8 +294,9 @@ public class Fenetre extends JFrame implements MouseListener {
 							
 						}
 						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
+						decouvertes.setDecouverte(true, i, j);
 					}
-					if(clic == 3) {  // si clic droit, ajout d'un drapeau
+					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
 						if(!drapeaux.getDrapeau(i,j)){
 							btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
 							drapeaux.setDrapeau(true, i, j);
