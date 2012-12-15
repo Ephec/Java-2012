@@ -298,8 +298,7 @@ public class Fenetre extends JFrame implements MouseListener {
 							}
 							
 						}
-						btnCase[i][j].setBackground(new java.awt.Color(150,150,150)); 
-						btnCase[i][j].setForeground(new java.awt.Color(0,0,0));
+						btnCase[i][j].setBackground(new java.awt.Color(255,255,0)); 
 						decouvertes.setDecouverte(true, i, j);
 					}
 					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
