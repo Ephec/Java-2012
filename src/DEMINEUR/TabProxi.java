@@ -11,11 +11,10 @@ public class TabProxi {
 	 */
 	private static int[][] nbre = new int[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 
-	/**
-	 * Constructeur vide
-	 */
 	public TabProxi(){
 
+		nbMinesCase(Fenetre.getNbLignes(), Fenetre.getNbCols());
+		
 	}
 
 	/**

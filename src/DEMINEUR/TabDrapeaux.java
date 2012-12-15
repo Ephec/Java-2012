@@ -16,7 +16,7 @@ public class TabDrapeaux {
 		
 		for(int i=0; i<lignes;i++){
 			for(int j=0;j<cols;j++){
-				drapeau[i][j]=false;
+				drapeau[i][j] = false;
 			}
 		}
 		
