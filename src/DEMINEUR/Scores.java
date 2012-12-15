@@ -20,7 +20,7 @@ public class Scores {
 	private String sTemps;
 	// Tableau de scores de x lignes et " colonnes (nom, niveau et temps sous
 	// forme de string)
-	private String[][] tabScores;
+	private static String[][] tabScores;
 
 	private static String fichier = "score.txt";
 
@@ -60,7 +60,7 @@ public class Scores {
 	 * 
 	 * @return
 	 */
-	public int ligneFichier() {
+	public static int lignesFichier() {
 
 		int lignes = 0;
 
@@ -83,7 +83,7 @@ public class Scores {
 	/**
 	 * Lit le fichier texte et enregistre les score dans un tableau de score
 	 */
-	public String[][] lireFichier() {
+	public static String[][] lireFichier() {
 		String chaine = "";
 		int i=0;
 		// Séparateur de chaine
@@ -99,7 +99,7 @@ public class Scores {
 			// La colonne 0 est le nom, 1 est le temps et 2 est le niveau
 			while ((ligne = br.readLine()) != null) {
 				int j=0;
-				System.out.println(ligne);
+				//System.out.println(ligne);
 				while ( stringTokenizer.hasMoreTokens() )
 				{ 
 				   tabScores[i][j] = stringTokenizer.nextToken(); 

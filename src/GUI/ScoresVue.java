@@ -24,7 +24,8 @@ public class ScoresVue extends JFrame{
 	public ScoresVue(){
 
 		tabScores = Scores.lireFichier();
-		init();
+		System.out.println(tabScores[0][0]);
+		//init();
 
 	}
 
@@ -44,9 +45,9 @@ public class ScoresVue extends JFrame{
 		
 		for(int i = 0; i < Scores.lignesFichier(); i++){
 			
+			scores.add(new JLabel(tabScores[i][0]));
 			scores.add(new JLabel(tabScores[i][1]));
 			scores.add(new JLabel(tabScores[i][2]));
-			scores.add(new JLabel(tabScores[i][3]));
 			
 		}
 
