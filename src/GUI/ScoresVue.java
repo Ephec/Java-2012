@@ -3,79 +3,57 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
+
+import DEMINEUR.Scores;
 
 public class ScoresVue extends JFrame{
 
-	// Panel
-	JPanel sauverScore;
-	private JPanel validation;
-	// Texte
-	private JTextPane nom;
-	private JTextPane niveau;
-	private JTextPane score;
-	// Champs
-	private JTextField niveauAffiche;
-	private JTextField scoreAffiche;
-	private JTextField insertNom;
+	private JPanel scores = new JPanel();
+
+	private JLabel nom = new JLabel("Nom");
+	private JLabel niveau = new JLabel("Niveau");
+	private JLabel score = new JLabel("Score");
+	
+	private String[][] tabScores = new String[Scores.lignesFichier()][3];
 
 	public ScoresVue(){
 
+		tabScores = Scores.lireFichier();
 		init();
 
 	}
 
 	public void init(){
 
-		this.setTitle("Score");
-		this.setMinimumSize(new Dimension(500, 200));
+		this.setTitle("Scores");
+		this.setMinimumSize(new Dimension(500, 400));
 		this.setLocationRelativeTo(null);
-		sauverScore = new JPanel();
-		this.add(sauverScore);
-		sauverScore.setLayout(new GridLayout(4,2));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		this.add(scores);
+		scores.setLayout(new GridLayout(Scores.lignesFichier() + 1, 3));
 
-		// Colonne 1
-		sauverScore.add(getNom());
-		sauverScore.add(getScore());		
-		sauverScore.add(getNiveau());
+		scores.add(nom);
+		scores.add(niveau);		
+		scores.add(score);
+		
+		for(int i = 0; i < Scores.lignesFichier(); i++){
+			
+			scores.add(new JLabel(tabScores[i][1]));
+			scores.add(new JLabel(tabScores[i][2]));
+			scores.add(new JLabel(tabScores[i][3]));
+			
+		}
 
+		
 		this.setVisible(true);
 
 
-	}
-
-	public JTextPane getNom(){
-
-		nom = new JTextPane();
-		nom.setText("Nom");
-		nom.setEditable(false);
-
-		return nom;
-
-	}
-
-	public JTextPane getScore(){
-
-		score = new JTextPane();
-		score.setText("Score");
-		score.setEditable(false);
-
-		return score;
-	}
-
-	public JTextPane getNiveau(){
-
-		niveau = new JTextPane();
-		niveau.setText("Niveau");
-		niveau.setEditable(false);
-
-		return niveau;
 	}
 
 }

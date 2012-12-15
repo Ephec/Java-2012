@@ -34,7 +34,7 @@ public class NiveauPerso extends JFrame{
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		this.add(boite);
-		boite.setLayout(new GridLayout(6,4));
+		boite.setLayout(new GridLayout(6,2));
 	
 		boite.add(txtLignes);
 		boite.add(nbLignes);
