@@ -138,7 +138,7 @@ public class Scores {
 			FileWriter fw = new FileWriter(fichier);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.println(chaine + "\n test de lecture et écriture !!");
+			fichierSortie.println(chaine + "\t" +nom+ "\t" +sTemps+ "\t" +sLevel);
 			fichierSortie.close();
 			System.out.println("Le fichier " + fichier + " a été créé!");
 		} catch (Exception e) {

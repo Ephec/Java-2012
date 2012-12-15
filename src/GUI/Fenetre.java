@@ -265,6 +265,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 			String nom = JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE);
 			scores = new Scores(nom, 0, nivActuel);
+			scores.ecrireFichier();
 			reponse = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 
 			if(reponse == 1){
