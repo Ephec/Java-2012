@@ -18,9 +18,13 @@ public class NiveauPerso extends JFrame{
 	private JLabel txtCols = new JLabel("Nombre de colonnes : ");
 	private JLabel txtMines = new JLabel("Nombre de mines   : ");
 	
-	private JTextField nbLignes = new JTextField();
-	private JTextField nbCols = new JTextField();
-	private JTextField nbMines = new JTextField();
+	private JTextField nbLignesC = new JTextField();
+	private JTextField nbColsC = new JTextField();
+	private JTextField nbMinesC = new JTextField();
+	
+	private int nbLignes;
+	private int nbCols;
+	private int nbMines;
 	
 	private JButton ok = new JButton("ok");
 	private JButton annuler = new JButton("Annuler");
@@ -37,11 +41,11 @@ public class NiveauPerso extends JFrame{
 		boite.setLayout(new GridLayout(6,2));
 	
 		boite.add(txtLignes);
-		boite.add(nbLignes);
+		boite.add(nbLignesC);
 		boite.add(txtCols);
-		boite.add(nbCols);
+		boite.add(nbColsC);
 		boite.add(txtMines);
-		boite.add(nbMines);
+		boite.add(nbMinesC);
 		
 		boite.add(new JLabel());
 		boite.add(new JLabel());
@@ -56,11 +60,10 @@ public class NiveauPerso extends JFrame{
 		ok.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e) {
-				Fenetre.setNbLignes(Integer.parseInt(nbLignes.getText()));
+				nbLignes = Integer.parseInt(nbLignesC.getText());
 				//System.out.println(Lignes);
-				Fenetre.setNbCols(Integer.parseInt(nbCols.getText()));
-				Fenetre.setNbMines(Integer.parseInt(nbMines.getText()));
-				
+				nbCols = Integer.parseInt(nbColsC.getText());
+				nbMines = Integer.parseInt(nbMinesC.getText());
 			}        
 		});
 		boite.add(ok);
@@ -71,4 +74,30 @@ public class NiveauPerso extends JFrame{
 	public void verifMines(){
 		
 	}
+
+	public int getNbLignes() {
+		return nbLignes;
+	}
+
+	public void setNbLignes(int nbLignes) {
+		this.nbLignes = nbLignes;
+	}
+
+	public int getNbCols() {
+		return nbCols;
+	}
+
+	public void setNbCols(int nbCols) {
+		this.nbCols = nbCols;
+	}
+
+	public int getNbMines() {
+		return nbMines;
+	}
+
+	public void setNbMines(int nbMines) {
+		this.nbMines = nbMines;
+	}
+	
+	
 }

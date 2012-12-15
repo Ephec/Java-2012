@@ -114,7 +114,13 @@ public class Fenetre extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				Niveau niveau = new Niveau();
 				nivActuel = niveau.getReponse();
-				setNiveau(nivActuel);
+				System.out.println(""+nivActuel);
+				if (nivActuel>=0 && nivActuel<=2)
+					setNiveau(nivActuel);
+				if(nivActuel==3) {
+					niveauPerso = new NiveauPerso();
+					setNiveau(nivActuel);
+				}
 			}        
 		});
 		partie.add(nouvelle);
@@ -188,8 +194,11 @@ public class Fenetre extends JFrame implements MouseListener {
 			this.nbMinesRest = nbMines;
 			break;
 		case 3:
-			niveauPerso = new NiveauPerso();
-
+			this.nbLignes = niveauPerso.getNbLignes();
+			this.nbCols = niveauPerso.getNbCols();
+			this.nbMines = niveauPerso.getNbMines();
+			this.nbMinesRest = nbMines;
+		
 		}
 		setGrille();
 
