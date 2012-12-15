@@ -49,7 +49,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_FACILE = 10;
 	public static int NB_COLS_FACILE = 15;
-	public static int NB_MINES_FACILE = 10;
+	public static int NB_MINES_FACILE = 2;
 
 	public static int NB_LIGNES_MOYEN = 15;
 	public static int NB_COLS_MOYEN = 20;
@@ -244,6 +244,34 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	}
 
+	public void verifGagne() {
+
+		int compteur = 0;
+		int nbNonDecouvertes = 0;
+
+		for (int i = 0; i < nbLignes ; i++) {
+			for(int j = 0; j < nbCols ; j++) {
+				if(!decouvertes.getDecouverte(i, j)){
+					nbNonDecouvertes++;
+				}
+			}
+		}
+		if(nbNonDecouvertes == nbMines){
+			for (int i = 0; i < nbLignes ; i++) {
+				for(int j = 0; j < nbCols ; j++) {
+					if(mines.getMine(i, j) && !decouvertes.getDecouverte(i, j)){
+						compteur++;
+					}
+				}
+			}
+		}
+
+		if(compteur == nbMines){
+			JOptionPane.showMessageDialog(null, "GAGNE !!");
+		}
+
+	}
+
 	public void partiePerdue() {
 
 		int reponse = -1;
@@ -252,7 +280,7 @@ public class Fenetre extends JFrame implements MouseListener {
 		while(reponse == -1){
 			reponse = JOptionPane.showOptionDialog(null, "Vous avez malheureusement explosé sur un mine ...", "Partie perdue", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 		}
-		
+
 		if(reponse == 1){
 			System.exit(0);
 		}
@@ -279,25 +307,27 @@ public class Fenetre extends JFrame implements MouseListener {
 			for(int j = 0; j < nbCols; j++){
 				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
 					if(clic == 1){ // si clic gauche
-						
+
 						if(mines.getMine(i,j)){  // regarde si c'est une mine
 							partiePerdue();
 							break;
 						}else{ // si non, indique les mines au alentours
-							
+
 							int nbProxi = nbre.getNbre(i,j);
-							
+
 							if(nbProxi == 0){
 								btnCase[i][j].setText("");
 								//decouvrirCase(i,j);
 								decouvrirAutour(i,j);
-								
-								
+
+
 							} else {
 								decouvrirCase(i,j);
 								//btnCase[i][j].setText(""+nbre.getNbre(i,j));
 							}
-							
+
+							verifGagne();
+
 						}
 						//btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
@@ -325,14 +355,14 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public void mouseReleased(MouseEvent arg0) {
 	}
-	
+
 	public void decouvrirCase(int x, int y){
-			decouvertes.setDecouverte(true,x,y);
-			btnCase[x][y].setBackground(new java.awt.Color(190,190,190));
-			btnCase[x][y].setForeground(new java.awt.Color(0,0,0));
-			btnCase[x][y].setEnabled(false);
-			if(nbre.getNbre(x, y)!=0) btnCase[x][y].setText(""+nbre.getNbre(x,y));
-		
+		decouvertes.setDecouverte(true,x,y);
+		btnCase[x][y].setBackground(new java.awt.Color(190,190,190));
+		btnCase[x][y].setForeground(new java.awt.Color(0,0,0));
+		btnCase[x][y].setEnabled(false);
+		if(nbre.getNbre(x, y)!=0) btnCase[x][y].setText(""+nbre.getNbre(x,y));
+
 	}
 
 	public void decouvrirAutour(int x, int y){
@@ -348,9 +378,9 @@ public class Fenetre extends JFrame implements MouseListener {
 							decouvrirCase(x+i,y+j);
 							decouvrirAutour(x+i,y+j);
 						}
-						else decouvrirAutour(x+i,y+j);
+						//else decouvrirAutour(x+i,y+j);
 					}
-					
+
 					else if(!decouvertes.getDecouverte(x+i, y+j)){
 						//btnCase[x+i][y+j].setText(String.valueOf(nbre.getNbre(x+i, y+j)));
 						if (!drapeaux.getDrapeau(x+i, y+j)) decouvrirCase(x+i,y+j);

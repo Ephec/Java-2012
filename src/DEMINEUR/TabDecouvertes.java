@@ -19,8 +19,7 @@ public class TabDecouvertes {
 		
 		for(int i=0; i<lignes; i++){
 			for(int j=0; j<cols; j++){
-				//decouverte[i][j] = new boolean;
-				//decouverte[i][j] = false;
+				decouvertes[i][j] = false;
 			}
 		}
 		
