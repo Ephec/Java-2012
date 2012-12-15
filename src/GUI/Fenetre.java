@@ -294,6 +294,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		String[] action = {"Recommencer", "Quitter"};
 		while(reponse == -1){
+			decouvrirMines();
 			reponse = JOptionPane.showOptionDialog(null, "Vous avez malheureusement explosé sur un mine ...", "Partie perdue", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 		}
 
@@ -339,6 +340,18 @@ public class Fenetre extends JFrame implements MouseListener {
 			}
 		}
 
+	}
+	
+	public void decouvrirMines(){
+		for (int i=0;i<nbLignes;i++){
+			for(int j=0;j<nbCols;j++){
+				if(mines.getMine(i,j)){
+					btnCase[i][j].setEnabled(false);
+					btnCase[i][j].setBackground(new java.awt.Color(255,0,0));
+					btnCase[i][j].setText("M");
+				}
+			}
+		}
 	}
 
 	public void mousePressed(MouseEvent e) {
