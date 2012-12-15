@@ -83,9 +83,13 @@ public class Scores {
 	/**
 	 * Lit le fichier texte et enregistre les score dans un tableau de score
 	 */
-	public static String[][] lireFichier() {
+
+	
+	public String[][] lireFichier() {
 		String chaine = "";
 		int i=0;
+		tabScores = new String[lignesFichier()][3];
+		String[] temp = new String[3];
 		// Séparateur de chaine
 		StringTokenizer stringTokenizer = new StringTokenizer(chaine,"\t"); 
 
@@ -99,13 +103,9 @@ public class Scores {
 			// La colonne 0 est le nom, 1 est le temps et 2 est le niveau
 			while ((ligne = br.readLine()) != null) {
 				int j=0;
-				//System.out.println(ligne);
-				while ( stringTokenizer.hasMoreTokens() )
-				{ 
-				   tabScores[i][j] = stringTokenizer.nextToken(); 
-				   j++;
-				}
+				temp =ligne.split("-");
 				chaine += ligne + "\n";
+				tabScores[i]=temp;
 				i++;
 			}
 			br.close();
@@ -141,7 +141,7 @@ public class Scores {
 			FileWriter fw = new FileWriter(fichier);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.println(chaine + "\t" +nom+ "\t" +sTemps+ "\t" +sLevel);
+			fichierSortie.println(chaine + "" +nom+ "-" +sTemps+ "-" +sLevel);
 			fichierSortie.close();
 			System.out.println("Le fichier " + fichier + " a été créé!");
 		} catch (Exception e) {

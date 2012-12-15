@@ -19,12 +19,19 @@ public class ScoresVue extends JFrame{
 	private JLabel niveau = new JLabel("Niveau");
 	private JLabel score = new JLabel("Score");
 	
-	private String[][] tabScores = new String[Scores.lignesFichier()][3];
+	private String[][] tabScores = new String[Scores.lignesFichier()][4];
+	public Scores importation = new Scores("",0,0);
+	//String[][] tabScores = new String[importation.lignesFichier()-1][3]; 
 
 	public ScoresVue(){
 
-		tabScores = Scores.lireFichier();
-		System.out.println(tabScores[0][0]);
+		tabScores = importation.lireFichier();
+		System.out.println(""+importation.lignesFichier());
+
+		for(int i=0;i<importation.lignesFichier();i++){
+			System.out.println(""+tabScores[i][0]+"   "+tabScores[i][1]+"   "+tabScores[i][2]+"");
+		}
+		
 		//init();
 
 	}
