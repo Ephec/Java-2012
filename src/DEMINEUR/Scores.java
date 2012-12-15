@@ -83,7 +83,7 @@ public class Scores {
 	/**
 	 * Lit le fichier texte et enregistre les score dans un tableau de score
 	 */
-	public void lireFichier() {
+	public String[][] lireFichier() {
 		String chaine = "";
 		int i=0;
 		// Séparateur de chaine
@@ -112,6 +112,8 @@ public class Scores {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		
+		return tabScores;
 
 	}
 
