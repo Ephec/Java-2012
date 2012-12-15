@@ -14,8 +14,8 @@ public class TabDrapeaux {
 	
 	public void initTab(int lignes, int cols){
 		
-		for(int i=0; i<lignes;i++){
-			for(int j=0;j<cols;j++){
+		for(int i=0; i<lignes; i++){
+			for(int j=0; j<cols; j++){
 				drapeau[i][j] = false;
 			}
 		}

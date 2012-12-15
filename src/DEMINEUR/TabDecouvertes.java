@@ -8,15 +8,18 @@ public class TabDecouvertes {
 	
 	public  TabDecouvertes() {
 		
-		initDecouvertes(Fenetre.getNbLignes(), Fenetre.getNbCols());
+		initDecouvertes(Fenetre.getNbLignes(),Fenetre.getNbCols());
 		
 	}
 
 	public void initDecouvertes(int lignes, int cols) {
 		
-		for(int i=0; i<lignes;i++){
-			for(int j=0;j<cols;j++){
-				decouverte[i][j] = false;
+		
+		
+		for(int i=0; i<lignes; i++){
+			for(int j=0; j<cols; j++){
+				//decouverte[i][j] = new boolean;
+				//decouverte[i][j] = false;
 			}
 		}
 		

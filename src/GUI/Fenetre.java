@@ -216,12 +216,13 @@ public class Fenetre extends JFrame implements MouseListener {
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
 
-		TabMines mines = new TabMines();
-		TabProxi nbre = new TabProxi();
-		//TabDecouvertes decouvertes = new TabDecouvertes();  --> ca plante ici
+		mines = new TabMines();
+		nbre = new TabProxi();
+		decouvertes = new TabDecouvertes();
 
 		//mines.initMines(nbMines, nbLignes, nbCols);
 		//nbre.nbMinesCase(lignes, cols);
+		//decouvertes.initDecouvertes(nbLignes, nbCols);
 
 		container.setLayout(new GridLayout(lignes, cols));
 
