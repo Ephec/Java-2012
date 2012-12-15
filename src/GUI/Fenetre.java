@@ -70,8 +70,9 @@ public class Fenetre extends JFrame implements MouseListener {
 	private TabProxi nbre;
 	private TabDrapeaux drapeaux;
 	private TabDecouvertes decouvertes;
-	
+
 	private Scores scores;
+	private NiveauPerso niveauPerso;
 
 	/**
 	 * 
@@ -81,7 +82,7 @@ public class Fenetre extends JFrame implements MouseListener {
 		this.init();
 		this.setMenu();
 
-		this.setGrille(nbLignes, nbCols);
+		this.setGrille();
 
 		this.add(details, BorderLayout.NORTH);
 		this.pack();
@@ -187,25 +188,11 @@ public class Fenetre extends JFrame implements MouseListener {
 			this.nbMinesRest = nbMines;
 			break;
 		case 3:
-			this.setNivPerso();
+			niveauPerso = new NiveauPerso();
 
 		}
-		setGrille(nbLignes, nbCols);
+		setGrille();
 
-	}
-
-	public void setNivPerso(){
-		/*this.setTitle("Niveau personnalisé");
-		this.setMinimumSize(new Dimension(300, 200));
-		this.setLocationRelativeTo(null);
-
-		JPanel choixNiv = new JPanel();
-		choixNiv.setLayout(new GridLayout(6,4));
-		this.add(choixNiv);
-
-		//int lignes = JTextField();
-
-		this.setVisible(true);*/
 	}
 
 	/**
@@ -214,7 +201,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	 * @param lignes
 	 * @param cols
 	 */
-	public void setGrille(int lignes, int cols){
+	public void setGrille(){
 
 		this.remove(container);
 
@@ -230,7 +217,7 @@ public class Fenetre extends JFrame implements MouseListener {
 		//nbre.nbMinesCase(lignes, cols);
 		//decouvertes.initDecouvertes(nbLignes, nbCols);
 
-		container.setLayout(new GridLayout(lignes, cols));
+		container.setLayout(new GridLayout(nbLignes, nbCols));
 
 		for (int i = 0; i < nbLignes ; i++) {
 			for(int j = 0; j < nbCols ; j++) {
@@ -276,7 +263,7 @@ public class Fenetre extends JFrame implements MouseListener {
 			int reponse = - 1;
 			String[] action = {"Recommencer", "Quitter"};
 
-			String nom = JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE);
+			String nom = JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE);
 			scores = new Scores(nom, 0, nivActuel);
 			reponse = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 
@@ -425,6 +412,20 @@ public class Fenetre extends JFrame implements MouseListener {
 	public static int getNbMines() {
 		return nbMines;
 	}
+
+	public static void setNbLignes(int nbLignes) {
+		Fenetre.nbLignes = nbLignes;
+	}
+
+	public static void setNbCols(int nbCols) {
+		Fenetre.nbCols = nbCols;
+	}
+
+	public static void setNbMines(int nbMines) {
+		Fenetre.nbMines = nbMines;
+	}
+	
+	
 
 }
 
