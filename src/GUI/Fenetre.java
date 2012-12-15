@@ -53,7 +53,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_MOYEN = 15;
 	public static int NB_COLS_MOYEN = 20;
-	public static int NB_MINES_MOYEN = 40;
+	public static int NB_MINES_MOYEN = 20;
 
 	public static int NB_LIGNES_DIF = 20;
 	public static int NB_COLS_DIF = 30;
@@ -267,7 +267,19 @@ public class Fenetre extends JFrame implements MouseListener {
 		}
 
 		if(compteur == nbMines){
-			JOptionPane.showMessageDialog(null, "GAGNE !!");
+			
+			int reponse = - 1;
+			String[] action = {"Recommencer", "Quitter"};
+			
+			reponse = JOptionPane.showOptionDialog(null, "Félicitations, vous avez gagné ...", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
+			
+			if(reponse == 1){
+				System.exit(0);
+			}
+			if(reponse == 0){
+				Niveau niveau = new Niveau();
+				setNiveau(niveau.getReponse());
+			}
 		}
 
 	}
