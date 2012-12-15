@@ -218,7 +218,8 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		mines = new TabMines();
 		nbre = new TabProxi();
-		//decouvertes = new TabDecouvertes();
+		decouvertes = new TabDecouvertes();
+		drapeaux = new TabDrapeaux();
 
 		//mines.initMines(nbMines, nbLignes, nbCols);
 		//nbre.nbMinesCase(lignes, cols);
@@ -288,14 +289,17 @@ public class Fenetre extends JFrame implements MouseListener {
 							
 							if(nbProxi == 0){
 								btnCase[i][j].setText("");
+								//decouvrirCase(i,j);
+								decouvrirAutour(i,j);
 								
 								
 							} else {
-								btnCase[i][j].setText(""+nbre.getNbre(i,j));
+								decouvrirCase(i,j);
+								//btnCase[i][j].setText(""+nbre.getNbre(i,j));
 							}
 							
 						}
-						btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
+						//btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
 					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
 						if(!drapeaux.getDrapeau(i,j)){
@@ -320,6 +324,41 @@ public class Fenetre extends JFrame implements MouseListener {
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
+	}
+	
+	public void decouvrirCase(int x, int y){
+			decouvertes.setDecouverte(true,x,y);
+			btnCase[x][y].setBackground(new java.awt.Color(190,190,190));
+			btnCase[x][y].setForeground(new java.awt.Color(0,0,0));
+			btnCase[x][y].setEnabled(false);
+			if(nbre.getNbre(x, y)!=0) btnCase[x][y].setText(""+nbre.getNbre(x,y));
+		
+	}
+
+	public void decouvrirAutour(int x, int y){
+
+		for(int i=-1;i<=1;i++){
+			for(int j=-1;j<=1;j++){
+				if((x+i)>= 0 && (x+i)<nbLignes && (y+j)>=0 && (y+j)<nbCols){
+					if(
+							nbre.getNbre(x+i, y+j) == 0 && !decouvertes.getDecouverte(x+i, y+j)
+							)
+					{
+						if(!drapeaux.getDrapeau(x+i, y+j)) {
+							decouvrirCase(x+i,y+j);
+							decouvrirAutour(x+i,y+j);
+						}
+						else decouvrirAutour(x+i,y+j);
+					}
+					
+					else if(!decouvertes.getDecouverte(x+i, y+j)){
+						//btnCase[x+i][y+j].setText(String.valueOf(nbre.getNbre(x+i, y+j)));
+						if (!drapeaux.getDrapeau(x+i, y+j)) decouvrirCase(x+i,y+j);
+					}
+				}
+			}
+		}
+
 	}
 
 	// Getters and setters

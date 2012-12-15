@@ -4,10 +4,11 @@ import GUI.Fenetre;
 
 public class TabDecouvertes {
 	
-	private static boolean[][] decouverte = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+	private boolean[][] decouvertes;
 	
 	public  TabDecouvertes() {
 		
+		decouvertes = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 		initDecouvertes(Fenetre.getNbLignes(),Fenetre.getNbCols());
 		
 	}
@@ -25,12 +26,12 @@ public class TabDecouvertes {
 		
 	}
 	
-	public static boolean getDecouverte(int x, int y) {
-		return decouverte[x][y];
+	public boolean getDecouverte(int x, int y) {
+		return decouvertes[x][y];
 	}
 
-	public static void setDecouverte(boolean decouverte, int x, int y) {
-		TabDecouvertes.decouverte[x][y] = decouverte;
+	public void setDecouverte(boolean decouverte, int x, int y) {
+		decouvertes[x][y] = decouverte;
 	}
 	
 	

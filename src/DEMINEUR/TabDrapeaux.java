@@ -4,10 +4,11 @@ import GUI.Fenetre;
 
 public class TabDrapeaux {
 	
-	private static boolean[][] drapeau = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+	private boolean[][] drapeaux;
 	
 	public TabDrapeaux(){
 		
+		drapeaux = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 		initTab(Fenetre.getNbLignes(),Fenetre.getNbCols());
 		
 	}
@@ -16,18 +17,18 @@ public class TabDrapeaux {
 		
 		for(int i=0; i<lignes; i++){
 			for(int j=0; j<cols; j++){
-				drapeau[i][j] = false;
+				drapeaux[i][j] = false;
 			}
 		}
 		
 	}
 
-	public static boolean getDrapeau(int x, int y) {
-		return drapeau[x][y];
+	public boolean getDrapeau(int x, int y) {
+		return drapeaux[x][y];
 	}
 
-	public static void setDrapeau(boolean drapeau, int x, int y) {
-		TabDrapeaux.drapeau[x][y] = drapeau;
+	public void setDrapeau(boolean drapeau, int x, int y) {
+		drapeaux[x][y] = drapeau;
 	}
 	
 	
