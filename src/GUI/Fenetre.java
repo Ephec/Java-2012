@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import DEMINEUR.Scores;
 import DEMINEUR.TabDecouvertes;
 import DEMINEUR.TabDrapeaux;
 import DEMINEUR.TabMines;
@@ -49,7 +50,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_FACILE = 10;
 	public static int NB_COLS_FACILE = 15;
-	public static int NB_MINES_FACILE = 2;
+	public static int NB_MINES_FACILE = 3;
 
 	public static int NB_LIGNES_MOYEN = 15;
 	public static int NB_COLS_MOYEN = 20;
@@ -57,17 +58,20 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_DIF = 20;
 	public static int NB_COLS_DIF = 30;
-	public static int NB_MINES_DIF = 150;
+	public static int NB_MINES_DIF = 50;
 
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
 	private static int nbMines = NB_MINES_FACILE;
 	private static int nbMinesRest = nbMines;
+	private static int nivActuel = 0;
 
 	private TabMines mines;
 	private TabProxi nbre;
 	private TabDrapeaux drapeaux;
 	private TabDecouvertes decouvertes;
+	
+	private Scores scores;
 
 	/**
 	 * 
@@ -108,14 +112,15 @@ public class Fenetre extends JFrame implements MouseListener {
 		nouvelle.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				Niveau niveau = new Niveau();
-				setNiveau(niveau.getReponse());
+				nivActuel = niveau.getReponse();
+				setNiveau(nivActuel);
 			}        
 		});
 		partie.add(nouvelle);
 		partie.add(reseau);
 		statistiques.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Score score = new Score();
+				ScoresVue scoresVue = new ScoresVue();
 			}
 		});
 		partie.add(statistiques);
@@ -267,12 +272,14 @@ public class Fenetre extends JFrame implements MouseListener {
 		}
 
 		if(compteur == nbMines){
-			
+
 			int reponse = - 1;
 			String[] action = {"Recommencer", "Quitter"};
-			
-			reponse = JOptionPane.showOptionDialog(null, "Félicitations, vous avez gagné ...", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
-			
+
+			String nom = JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE);
+			scores = new Scores(nom, 0, nivActuel);
+			reponse = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
+
 			if(reponse == 1){
 				System.exit(0);
 			}
@@ -300,73 +307,6 @@ public class Fenetre extends JFrame implements MouseListener {
 			Niveau niveau = new Niveau();
 			setNiveau(niveau.getReponse());
 		}
-	}
-
-	/*
-	 * Classes générées automatiquement via MouseListener
-	 */
-	public void mouseClicked(MouseEvent arg0) {
-	}
-
-	public void mouseEntered(MouseEvent arg0) {
-	}
-
-	public void mousePressed(MouseEvent e) {
-		// recupère le clic (gauche ou droite)
-		int clic = e.getButton();
-
-		for(int i = 0; i < nbLignes; i++){
-			for(int j = 0; j < nbCols; j++){
-				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
-					if(clic == 1){ // si clic gauche
-						if(!drapeaux.getDrapeau(i, j)){
-							if(mines.getMine(i,j)){  // regarde si c'est une mine
-								partiePerdue();
-								break;
-							}else{ // si non, indique les mines au alentours
-	
-								int nbProxi = nbre.getNbre(i,j);
-	
-								if(nbProxi == 0){
-									btnCase[i][j].setText("");
-									//decouvrirCase(i,j);
-									decouvrirAutour(i,j);
-	
-	
-								} else {
-									decouvrirCase(i,j);
-									//btnCase[i][j].setText(""+nbre.getNbre(i,j));
-								}
-	
-								verifGagne();
-	
-							}
-							//btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
-						}
-					}
-					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
-						if(!drapeaux.getDrapeau(i,j)){
-							btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
-							drapeaux.setDrapeau(true, i, j);
-							nbMinesRest --;
-						}
-						else {
-							btnCase[i][j].setText("");
-							drapeaux.setDrapeau(false, i, j);
-							nbMinesRest ++;
-						}
-						details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
-					}
-				}
-			}
-		}
-	}
-
-
-	public void mouseExited(MouseEvent arg0) {
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
 	}
 
 	public void decouvrirCase(int x, int y){
@@ -401,6 +341,74 @@ public class Fenetre extends JFrame implements MouseListener {
 				}
 			}
 		}
+
+	}
+
+	public void mousePressed(MouseEvent e) {
+		// recupère le clic (gauche ou droite)
+		int clic = e.getButton();
+
+		for(int i = 0; i < nbLignes; i++){
+			for(int j = 0; j < nbCols; j++){
+				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
+					if(clic == 1){ // si clic gauche
+						if(!drapeaux.getDrapeau(i, j)){
+							if(mines.getMine(i,j)){  // regarde si c'est une mine
+								partiePerdue();
+								break;
+							}else{ // si non, indique les mines au alentours
+
+								int nbProxi = nbre.getNbre(i,j);
+
+								if(nbProxi == 0){
+									btnCase[i][j].setText("");
+									//decouvrirCase(i,j);
+									decouvrirAutour(i,j);
+
+
+								} else {
+									decouvrirCase(i,j);
+									//btnCase[i][j].setText(""+nbre.getNbre(i,j));
+								}
+
+								verifGagne();
+
+							}
+							//btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
+						}
+					}
+					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
+						if(!drapeaux.getDrapeau(i,j)){
+							btnCase[i][j].setText("D"); //faut une solution car on peut cliquer plusieurs fois sur une meme case et meme si elle est disable :p
+							drapeaux.setDrapeau(true, i, j);
+							nbMinesRest --;
+						}
+						else {
+							btnCase[i][j].setText("");
+							drapeaux.setDrapeau(false, i, j);
+							nbMinesRest ++;
+						}
+						details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
+					}
+				}
+			}
+		}
+	}
+
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	public void mouseExited(MouseEvent e) {
 
 	}
 

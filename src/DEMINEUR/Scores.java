@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 
 import GUI.Fenetre;
 
-public class Score {
+public class Scores {
 
 	private String nom;
 	private int temps;
@@ -24,7 +24,7 @@ public class Score {
 
 	private static String fichier = "score.txt";
 
-	public Score(String nom, int temps, int level) {
+	public Scores(String nom, int temps, int level) {
 
 		this.nom = nom;
 		this.temps = temps;

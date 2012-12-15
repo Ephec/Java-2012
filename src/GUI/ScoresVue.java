@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-public class Score extends JFrame{
+public class ScoresVue extends JFrame{
 
 	// Panel
 	JPanel sauverScore;
@@ -27,7 +27,7 @@ public class Score extends JFrame{
 	private JTextField scoreAffiche;
 	private JTextField insertNom;
 
-	public Score(){
+	public ScoresVue(){
 
 		init();
 
@@ -81,3 +81,5 @@ public class Score extends JFrame{
 	}
 
 }
+
+
