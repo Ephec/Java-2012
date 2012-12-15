@@ -218,7 +218,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		mines = new TabMines();
 		nbre = new TabProxi();
-		decouvertes = new TabDecouvertes();
+		//decouvertes = new TabDecouvertes();
 
 		//mines.initMines(nbMines, nbLignes, nbCols);
 		//nbre.nbMinesCase(lignes, cols);
