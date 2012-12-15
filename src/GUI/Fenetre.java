@@ -307,29 +307,30 @@ public class Fenetre extends JFrame implements MouseListener {
 			for(int j = 0; j < nbCols; j++){
 				if(e.getSource() == btnCase[i][j]){  // lie le clic à une case avec ses coordonnées
 					if(clic == 1){ // si clic gauche
-
-						if(mines.getMine(i,j)){  // regarde si c'est une mine
-							partiePerdue();
-							break;
-						}else{ // si non, indique les mines au alentours
-
-							int nbProxi = nbre.getNbre(i,j);
-
-							if(nbProxi == 0){
-								btnCase[i][j].setText("");
-								//decouvrirCase(i,j);
-								decouvrirAutour(i,j);
-
-
-							} else {
-								decouvrirCase(i,j);
-								//btnCase[i][j].setText(""+nbre.getNbre(i,j));
+						if(!drapeaux.getDrapeau(i, j)){
+							if(mines.getMine(i,j)){  // regarde si c'est une mine
+								partiePerdue();
+								break;
+							}else{ // si non, indique les mines au alentours
+	
+								int nbProxi = nbre.getNbre(i,j);
+	
+								if(nbProxi == 0){
+									btnCase[i][j].setText("");
+									//decouvrirCase(i,j);
+									decouvrirAutour(i,j);
+	
+	
+								} else {
+									decouvrirCase(i,j);
+									//btnCase[i][j].setText(""+nbre.getNbre(i,j));
+								}
+	
+								verifGagne();
+	
 							}
-
-							verifGagne();
-
+							//btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 						}
-						//btnCase[i][j].setEnabled(false);  // désactive les cases cliquée mais ca ne désactive pas complètement :p
 					}
 					if(clic == 3 && !decouvertes.getDecouverte(i,j)) {  // si clic droit, ajout d'un drapeau
 						if(!drapeaux.getDrapeau(i,j)){
