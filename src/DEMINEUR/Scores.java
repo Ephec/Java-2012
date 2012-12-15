@@ -103,9 +103,10 @@ public class Scores {
 				while ( stringTokenizer.hasMoreTokens() )
 				{ 
 				   tabScores[i][j] = stringTokenizer.nextToken(); 
-				   i++;
+				   j++;
 				}
 				chaine += ligne + "\n";
+				i++;
 			}
 			br.close();
 		} catch (Exception e) {
