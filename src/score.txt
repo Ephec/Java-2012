@@ -1,0 +1,10 @@
+Cédric/Facile/0
+Antoine/Facile/0
+Boss/Facile/0
+Cédric/Facile/1
+Ced/Facile/0
+Moi/Moyen/0
+Test/Difficile/0
+test/Difficile/0
+autre/Difficile/0
+nom/Difficile/0

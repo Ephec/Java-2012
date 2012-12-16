@@ -17,50 +17,51 @@ public class ScoresVue extends JFrame{
 
 	private JLabel nom = new JLabel("Nom");
 	private JLabel niveau = new JLabel("Niveau");
-	private JLabel score = new JLabel("Score");
-	
-	private String[][] tabScores = new String[Scores.lignesFichier()][4];
+	private JLabel score = new JLabel("Temps (s)");
+
+	private String[][] tabScores = new String[Scores.lignesFichier()][3];
 	public Scores importation = new Scores("",0,0);
-	//String[][] tabScores = new String[importation.lignesFichier()-1][3]; 
 
 	public ScoresVue(){
 
 		tabScores = importation.lireFichier();
-		System.out.println(""+importation.lignesFichier());
-
-		for(int i=0;i<importation.lignesFichier();i++){
-			System.out.println(""+tabScores[i][0]+"   "+tabScores[i][1]+"   "+tabScores[i][2]+"");
-		}
-		
-		//init();
+		init();
+		afficherScores();
 
 	}
 
 	public void init(){
 
 		this.setTitle("Scores");
-		this.setMinimumSize(new Dimension(500, 400));
+		this.setMinimumSize(new Dimension(400, (importation.lignesFichier() + 2 ) * 30));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+
 		this.add(scores);
-		scores.setLayout(new GridLayout(Scores.lignesFichier() + 1, 3));
+		scores.setLayout(new GridLayout(importation.lignesFichier() + 2, 3));
 
 		scores.add(nom);
 		scores.add(niveau);		
 		scores.add(score);
 		
-		for(int i = 0; i < Scores.lignesFichier(); i++){
-			
+		scores.add(new JLabel());
+		scores.add(new JLabel());
+		scores.add(new JLabel());
+
+		this.setVisible(true);
+
+	}
+
+	private void afficherScores() {
+
+		for(int i = 0; i < importation.lignesFichier(); i++){
+
+			//System.out.println(""+tabScores[i][0]+"   "+tabScores[i][1]+"   "+tabScores[i][2]+"");
 			scores.add(new JLabel(tabScores[i][0]));
 			scores.add(new JLabel(tabScores[i][1]));
 			scores.add(new JLabel(tabScores[i][2]));
-			
+
 		}
-
-		
-		this.setVisible(true);
-
 
 	}
 

@@ -24,12 +24,13 @@ public class Scores {
 
 	private static String fichier = "score.txt";
 
-	public Scores(String nom, int temps, int level) {
+	public Scores(String nom, int level, int temps) {
 
+		//System.out.println(level);
 		this.nom = nom;
 		this.temps = temps;
 		this.level = level;
-		sTemps = String.valueOf(level);
+		//sTemps = String.valueOf(level);
 		sLevel = strLevel();
 
 	}
@@ -47,7 +48,7 @@ public class Scores {
 			str = "Difficile";
 			break;
 		case 3:
-			str = "PersonnalisÃ©";
+			str = "Personnalisé";
 			break;
 		}
 
@@ -103,7 +104,7 @@ public class Scores {
 			// La colonne 0 est le nom, 1 est le temps et 2 est le niveau
 			while ((ligne = br.readLine()) != null) {
 				int j=0;
-				temp =ligne.split("-");
+				temp =ligne.split("/");
 				chaine += ligne + "\n";
 				tabScores[i]=temp;
 				i++;
@@ -141,9 +142,9 @@ public class Scores {
 			FileWriter fw = new FileWriter(fichier);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.println(chaine + "" +nom+ "-" +sTemps+ "-" +sLevel);
+			fichierSortie.println(chaine + "" +nom+ "/" +sLevel+ "/" +temps);
 			fichierSortie.close();
-			System.out.println("Le fichier " + fichier + " a été créé!");
+			//System.out.println("Le fichier " + fichier + " a été créé!");
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

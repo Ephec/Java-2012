@@ -22,9 +22,9 @@ public class NiveauPerso extends JFrame{
 	private JTextField nbColsC = new JTextField();
 	private JTextField nbMinesC = new JTextField();
 	
-	private int nbLignes;
-	private int nbCols;
-	private int nbMines;
+	private int nbLignes = 1;
+	private int nbCols = 1;
+	private int nbMines = 1;
 	
 	private JButton ok = new JButton("ok");
 	private JButton annuler = new JButton("Annuler");
@@ -35,10 +35,10 @@ public class NiveauPerso extends JFrame{
 		this.setTitle("Niveau personnalisé");
 		this.setMinimumSize(new Dimension(300, 200));
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.add(boite);
-		boite.setLayout(new GridLayout(6,2));
+		boite.setLayout(new GridLayout(5,2));
 	
 		boite.add(txtLignes);
 		boite.add(nbLignesC);
@@ -52,6 +52,7 @@ public class NiveauPerso extends JFrame{
 		
 		annuler.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				Fenetre f = new Fenetre();
 				dispose();
 			}        
 		});
@@ -60,10 +61,13 @@ public class NiveauPerso extends JFrame{
 		ok.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e) {
-				nbLignes = Integer.parseInt(nbLignesC.getText());
-				//System.out.println(Lignes);
-				nbCols = Integer.parseInt(nbColsC.getText());
-				nbMines = Integer.parseInt(nbMinesC.getText());
+				
+				Fenetre.setNbLignes(Integer.parseInt(nbLignesC.getText()));
+				Fenetre.setNbCols(Integer.parseInt(nbColsC.getText()));
+				Fenetre.setNbMines(Integer.parseInt(nbMinesC.getText()));
+				Fenetre f = new Fenetre();
+				dispose();
+				
 			}        
 		});
 		boite.add(ok);

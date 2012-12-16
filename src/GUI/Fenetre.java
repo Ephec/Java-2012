@@ -55,11 +55,11 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_MOYEN = 15;
 	public static int NB_COLS_MOYEN = 20;
-	public static int NB_MINES_MOYEN = 20;
+	public static int NB_MINES_MOYEN = 3;
 
 	public static int NB_LIGNES_DIF = 20;
 	public static int NB_COLS_DIF = 30;
-	public static int NB_MINES_DIF = 50;
+	public static int NB_MINES_DIF = 5;
 
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
@@ -80,6 +80,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	 */
 	public Fenetre(){
 
+		
 		this.init();
 		this.setMenu();
 
@@ -115,13 +116,7 @@ public class Fenetre extends JFrame implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				Niveau niveau = new Niveau();
 				nivActuel = niveau.getReponse();
-				System.out.println(""+nivActuel);
-				if (nivActuel>=0 && nivActuel<=2)
-					setNiveau(nivActuel);
-				if(nivActuel==3) {
-					niveauPerso = new NiveauPerso();
-					setNiveau(nivActuel);
-				}
+				setNiveau(nivActuel);
 			}        
 		});
 		partie.add(nouvelle);
@@ -195,10 +190,10 @@ public class Fenetre extends JFrame implements MouseListener {
 			this.nbMinesRest = nbMines;
 			break;
 		case 3:
-			this.nbLignes = niveauPerso.getNbLignes();
-			this.nbCols = niveauPerso.getNbCols();
-			this.nbMines = niveauPerso.getNbMines();
-			this.nbMinesRest = nbMines;
+			//System.out.println(""+nbLignes);
+			niveauPerso = new NiveauPerso();
+			dispose();
+			//System.out.println(""+nbLignes);
 		}
 		setGrille();
 
@@ -241,6 +236,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 		details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
 		this.add(container);
+		this.setLocationRelativeTo(null);
 		this.pack();
 
 	}
@@ -273,9 +269,13 @@ public class Fenetre extends JFrame implements MouseListener {
 			String[] action = {"Recommencer", "Quitter"};
 
 			String nom = (String) JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE,null,null,getComputerFullName());
-			scores = new Scores(nom, 0, nivActuel);
-			if(nom!=null) scores.ecrireFichier();
-			//scores.ecrireFichier();
+			
+			if(nom!=null){
+				//System.out.println(""+nivActuel);
+				scores = new Scores(nom, nivActuel, 0);
+				scores.ecrireFichier();
+			}
+
 			reponse = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 
 			if(reponse == 1){
