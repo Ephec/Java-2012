@@ -55,15 +55,15 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_FACILE = 10;
 	public static int NB_COLS_FACILE = 15;
-	public static int NB_MINES_FACILE = 10;
+	public static int NB_MINES_FACILE = 13;
 
 	public static int NB_LIGNES_MOYEN = 15;
 	public static int NB_COLS_MOYEN = 20;
-	public static int NB_MINES_MOYEN = 20;
+	public static int NB_MINES_MOYEN = 50;
 
 	public static int NB_LIGNES_DIF = 20;
 	public static int NB_COLS_DIF = 30;
-	public static int NB_MINES_DIF = 50;
+	public static int NB_MINES_DIF = 120;
 
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
