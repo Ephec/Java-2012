@@ -44,12 +44,18 @@ public class ScoresVue extends JFrame{
 	public void init(){
 
 		this.setTitle("Scores");
-		this.setMinimumSize(new Dimension(400, (importation.lignesFichier() + 2 ) * 30));
+		if(!estLong(importation.lignesFichier()))
+			this.setMinimumSize(new Dimension(400, (importation.lignesFichier() + 2 ) * 30));
+		else
+			this.setMinimumSize(new Dimension(400,12*30));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		this.add(scores);
-		scores.setLayout(new GridLayout(importation.lignesFichier() + 2, 3));
+		if(!estLong(importation.lignesFichier()))
+			scores.setLayout(new GridLayout(importation.lignesFichier() + 2, 3));
+		else
+			scores.setLayout(new GridLayout(12, 3));
 
 		scores.add(nom);
 		scores.add(niveau);		
@@ -68,7 +74,7 @@ public class ScoresVue extends JFrame{
 	 */
 	private void afficherScores() {
 
-		if(importation.lignesFichier()<=10){
+		if(!estLong(importation.lignesFichier())){
 
 			for(int i = 0; i < importation.lignesFichier(); i++){
 				scores.add(new JLabel(tabScores[i][0]));
@@ -83,6 +89,19 @@ public class ScoresVue extends JFrame{
 				scores.add(new JLabel(tabScores[i][2]));
 			}
 		}
+	}
+	
+	/**
+	 * Permet de savoir si notre fichier contient plus de 10 lignes
+	 * @param x
+	 * @return boolean
+	 */
+	public boolean estLong(int x){
+		
+		boolean estlong;
+		if (x>10) estlong=true;
+		else estlong=false;
+		return estlong;
 	}
 
 }
