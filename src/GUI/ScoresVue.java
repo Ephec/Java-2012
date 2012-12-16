@@ -54,7 +54,7 @@ public class ScoresVue extends JFrame{
 		scores.add(nom);
 		scores.add(niveau);		
 		scores.add(score);
-		
+
 		scores.add(new JLabel());
 		scores.add(new JLabel());
 		scores.add(new JLabel());
@@ -68,15 +68,21 @@ public class ScoresVue extends JFrame{
 	 */
 	private void afficherScores() {
 
-		for(int i = 0; i < importation.lignesFichier(); i++){
+		if(importation.lignesFichier()<=10){
 
-			//System.out.println(""+tabScores[i][0]+"   "+tabScores[i][1]+"   "+tabScores[i][2]+"");
-			scores.add(new JLabel(tabScores[i][0]));
-			scores.add(new JLabel(tabScores[i][1]));
-			scores.add(new JLabel(tabScores[i][2]));
-
+			for(int i = 0; i < importation.lignesFichier(); i++){
+				scores.add(new JLabel(tabScores[i][0]));
+				scores.add(new JLabel(tabScores[i][1]));
+				scores.add(new JLabel(tabScores[i][2]));
+			}
 		}
-
+		else{
+			for(int i=importation.lignesFichier()-10;i<importation.lignesFichier();i++){
+				scores.add(new JLabel(tabScores[i][0]));
+				scores.add(new JLabel(tabScores[i][1]));
+				scores.add(new JLabel(tabScores[i][2]));
+			}
+		}
 	}
 
 }
