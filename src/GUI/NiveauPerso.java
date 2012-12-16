@@ -11,6 +11,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe utilisée lors de la création d'une partie personnalisée
+ * 
+ * @author BETAS A. & BREMER C.
+ */
 public class NiveauPerso extends JFrame{
 
 	private JPanel boite = new JPanel();
@@ -30,12 +35,18 @@ public class NiveauPerso extends JFrame{
 	private int nbCols;
 	private int nbMines;
 
+	/**
+	 * Constructeur de la fenêtre pour le niveau personnalisé
+	 */
 	public NiveauPerso() {
 
 		initNivPerso();
 
 	}
 
+	/**
+	 * Initialisation de la fenêtre pour le niveau personnalisé
+	 */
 	public void initNivPerso(){
 
 		this.setTitle("Niveau personnalisé");
@@ -80,6 +91,10 @@ public class NiveauPerso extends JFrame{
 		this.setVisible(true);
 	}
 
+	/**
+	 * Vérification des nombres entrés afin de ne pas faire planter le programme
+	 * @return boolean
+	 */
 	public boolean verifEntrees(){
 
 		try{
@@ -96,7 +111,10 @@ public class NiveauPerso extends JFrame{
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Créer le niveau personnalisé au niveau de la fenêtre principale via ses getters
+	 */
 	public void creationNiv() {
 
 		Fenetre.setNbLignes(nbLignes);
