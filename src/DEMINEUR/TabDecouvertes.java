@@ -2,10 +2,18 @@ package DEMINEUR;
 
 import GUI.Fenetre;
 
+/**
+ * Classe de gestion des cases découvertes
+ * 
+ * @author BETAS A. & BREMER C.
+ */
 public class TabDecouvertes {
 	
 	private boolean[][] decouvertes;
 	
+	/**
+	 * Constructeur du tableau de cases découvertes
+	 */
 	public  TabDecouvertes() {
 		
 		decouvertes = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
@@ -13,9 +21,12 @@ public class TabDecouvertes {
 		
 	}
 
-	public void initDecouvertes(int lignes, int cols) {
-		
-		
+	/**
+	 * Initialisation du tableau de cases découvertes
+	 * @param lignes
+	 * @param cols
+	 */
+	public void initDecouvertes(int lignes, int cols) {		
 		
 		for(int i=0; i<lignes; i++){
 			for(int j=0; j<cols; j++){

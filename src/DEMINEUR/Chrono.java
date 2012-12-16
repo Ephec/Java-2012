@@ -16,7 +16,9 @@ public class Chrono implements Runnable
 	private int    dixiemeseconde = 0;
 	boolean arret;//utilisation de cette variable pour l'arret du thread
 
-
+	/**
+	 * Permet de démarrer le chrono
+	 */
 	public void start ()
 	{
 		//demarrage de notre thread
@@ -24,7 +26,9 @@ public class Chrono implements Runnable
 		chronometre.start ();
 	}
 
-
+	/**
+	 * Méthode qui défini la mannière dont le thread fonctionne, en comptant en dixièmes de seconde
+	 */
 	public void run()
 	{
 		try
@@ -48,7 +52,9 @@ public class Chrono implements Runnable
 		}
 	}
 
-	//methode pour "l'arret" de notre thread
+	/**
+	 * Permet de stopper le chrono
+	 */
 	public void stop ()
 	{
 		arret = true;
@@ -58,20 +64,17 @@ public class Chrono implements Runnable
 		}
 	}
 	
-	//methode retournant notre temps sous forme de chaine de caracteres
-	/*public String resultat()
-	{
-		return dixiemeseconde / 36000
-        + ":" + (dixiemeseconde / 6000) % 6 + (dixiemeseconde / 600) % 10
-        + ":" + (dixiemeseconde / 100) % 6  + (dixiemeseconde / 10) % 10
-        + ":" + dixiemeseconde % 10;
-
-	}*/
-	
+	/**
+	 * Retourne le résultat en secondes de notre chrono
+	 * @return dixiemesseconde/10
+	 */
 	public int resultat(){
 		return (dixiemeseconde/10);
 	}
 	
+	/**
+	 * Reset le chrono a zéro
+	 */
 	public void reset(){
 		dixiemeseconde=0;
 	}

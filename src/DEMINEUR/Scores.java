@@ -11,6 +11,11 @@ import java.util.StringTokenizer;
 
 import GUI.Fenetre;
 
+/**
+ * Classe de gestion des scores
+ * 
+ * @author BETAS A. & BREMER C.
+ */
 public class Scores {
 
 	private String nom;
@@ -59,7 +64,7 @@ public class Scores {
 	 * Permet de connaitre le nombre de lignes de score dans le fichier texte
 	 * afin de créer un tableau de scores lors de la lecture du fichier
 	 * 
-	 * @return
+	 * @return int
 	 */
 	public static int lignesFichier() {
 
@@ -82,17 +87,18 @@ public class Scores {
 	}
 
 	/**
-	 * Lit le fichier texte et enregistre les score dans un tableau de score
+	 * Lit le fichier texte score.txt et renvoi un tableau de String à deux dimensions
+	 * Colonne 0 : Nom
+	 * Colonne 1 : Temps
+	 * Colonne 2 : Niveau
+	 * 
+	 * @return String[][]
 	 */
-
-	
 	public String[][] lireFichier() {
 		String chaine = "";
 		int i=0;
 		tabScores = new String[lignesFichier()][3];
 		String[] temp = new String[3];
-		// Séparateur de chaine
-		StringTokenizer stringTokenizer = new StringTokenizer(chaine,"\t"); 
 
 		// lecture du fichier texte
 		try {
@@ -100,8 +106,6 @@ public class Scores {
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
-			// Décompose une chaine sur le \t et va le mettre sur la ligne i et la colonne j
-			// La colonne 0 est le nom, 1 est le temps et 2 est le niveau
 			while ((ligne = br.readLine()) != null) {
 				int j=0;
 				temp =ligne.split("/");

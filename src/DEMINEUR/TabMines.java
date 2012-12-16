@@ -2,7 +2,11 @@ package DEMINEUR;
 
 import GUI.Fenetre;
 
-
+/**
+ * Gère l'emplacement des mines dans un tableau
+ * 
+ * @author BETAS A. & BREMER C.
+ */
 public class TabMines {
 	
 	/*
@@ -10,6 +14,9 @@ public class TabMines {
 	 */
 	private static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 	
+	/**
+	 * Constructeur du tableau de mines
+	 */
 	public TabMines(){
 		
 		initMines(Fenetre.getNbMines(),Fenetre.getNbLignes(),Fenetre.getNbCols());

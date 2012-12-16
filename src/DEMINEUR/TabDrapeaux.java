@@ -2,10 +2,18 @@ package DEMINEUR;
 
 import GUI.Fenetre;
 
+/**
+ * Classe de gestion de l'emplacement des drapeaux
+ * 
+ * @author BETAS A. & BREMER C.
+ */
 public class TabDrapeaux {
 	
 	private boolean[][] drapeaux;
 	
+	/**
+	 * Constructeur du tableau de drapeaux
+	 */
 	public TabDrapeaux(){
 		
 		drapeaux = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
@@ -13,6 +21,11 @@ public class TabDrapeaux {
 		
 	}
 	
+	/**
+	 * Initialisation du tableau de drapeaux
+	 * @param lignes
+	 * @param cols
+	 */
 	public void initTab(int lignes, int cols){
 		
 		for(int i=0; i<lignes; i++){

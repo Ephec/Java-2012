@@ -11,6 +11,11 @@ import javax.swing.JTextField;
 
 import DEMINEUR.Scores;
 
+/**
+ * Classe de gestion de la fenêtre "Statistiques" du démineur
+ * 
+ * @author BETAS A. & BREMER C.
+ */
 public class ScoresVue extends JFrame{
 
 	private JPanel scores = new JPanel();
@@ -22,6 +27,9 @@ public class ScoresVue extends JFrame{
 	private String[][] tabScores = new String[Scores.lignesFichier()][3];
 	public Scores importation = new Scores("",0,0);
 
+	/**
+	 * Constructeur de la fenêtre
+	 */
 	public ScoresVue(){
 
 		tabScores = importation.lireFichier();
@@ -30,6 +38,9 @@ public class ScoresVue extends JFrame{
 
 	}
 
+	/**
+	 * Initialise la fenêtre permettant de voir les scores
+	 */
 	public void init(){
 
 		this.setTitle("Scores");
@@ -52,6 +63,9 @@ public class ScoresVue extends JFrame{
 
 	}
 
+	/**
+	 * Permet d'afficher les scores dans la fenêtre
+	 */
 	private void afficherScores() {
 
 		for(int i = 0; i < importation.lignesFichier(); i++){

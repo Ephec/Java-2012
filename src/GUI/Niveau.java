@@ -11,13 +11,19 @@ import javax.swing.JOptionPane;
 public class Niveau {
 	
 	private int reponse;
-
+	
+	/**
+	 * Constructeur de Niveau
+	 */
 	public Niveau(){
 		
 		initFenetre();
 
 	}
 	
+	/**
+	 * Initialise la fenêtre de sélection du niveau
+	 */
 	public void initFenetre(){
 		
 		JOptionPane choix = new JOptionPane();
