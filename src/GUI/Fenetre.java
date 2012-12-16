@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.InetAddress;
 
 import DEMINEUR.Scores;
 import DEMINEUR.TabDecouvertes;
@@ -198,7 +199,6 @@ public class Fenetre extends JFrame implements MouseListener {
 			this.nbCols = niveauPerso.getNbCols();
 			this.nbMines = niveauPerso.getNbMines();
 			this.nbMinesRest = nbMines;
-		
 		}
 		setGrille();
 
@@ -272,9 +272,10 @@ public class Fenetre extends JFrame implements MouseListener {
 			int reponse = - 1;
 			String[] action = {"Recommencer", "Quitter"};
 
-			String nom = JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE);
+			String nom = (String) JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE,null,null,getComputerFullName());
 			scores = new Scores(nom, 0, nivActuel);
-			scores.ecrireFichier();
+			if(nom!=null) scores.ecrireFichier();
+			//scores.ecrireFichier();
 			reponse = JOptionPane.showOptionDialog(null, "Que voulez-vous faire ?", "Partie gagnée", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, action, action[1]);
 
 			if(reponse == 1){
@@ -286,6 +287,20 @@ public class Fenetre extends JFrame implements MouseListener {
 			}
 		}
 
+	}
+
+	/**
+	 * Fonction permettant de retourner le nom de la machine
+	 * @return
+	 */
+	public static String getComputerFullName() {
+		String hostName = null;
+		try {
+			final InetAddress addr = InetAddress.getLocalHost();
+			hostName = new String(addr.getHostName());
+		} catch(final Exception e) {
+		}
+		return hostName;
 	}
 
 	public void partiePerdue() {
@@ -341,7 +356,7 @@ public class Fenetre extends JFrame implements MouseListener {
 		}
 
 	}
-	
+
 	public void decouvrirMines(){
 		for (int i=0;i<nbLignes;i++){
 			for(int j=0;j<nbCols;j++){
@@ -447,8 +462,8 @@ public class Fenetre extends JFrame implements MouseListener {
 	public static void setNbMines(int nbMines) {
 		Fenetre.nbMines = nbMines;
 	}
-	
-	
+
+
 
 }
 

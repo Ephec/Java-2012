@@ -1,6 +1,15 @@
 package DEMINEUR;
-// Source du dossier : http://files.codes-sources.com/fichier.aspx?id=40336
 
+
+/**
+ * Chonomètre avec methode start, stop, résultat
+ * Source de la classe : http://files.codes-sources.com/fichier.aspx?id=40336
+ *  -> A la date du 21 novembre
+ * Les commentaires étaient présents au départ
+ * 
+ * @author BETAS A. & BREMER C.
+ *
+ */
 public class Chrono implements Runnable
 {
 	private Thread chronometre;
