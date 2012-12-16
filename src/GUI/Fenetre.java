@@ -461,6 +461,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static void setNbMines(int nbMines) {
 		Fenetre.nbMines = nbMines;
+		Fenetre.nbMinesRest = nbMines;
 	}
 
 
