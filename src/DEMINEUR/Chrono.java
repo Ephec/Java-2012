@@ -59,13 +59,21 @@ public class Chrono implements Runnable
 	}
 	
 	//methode retournant notre temps sous forme de chaine de caracteres
-	public String resultat()
+	/*public String resultat()
 	{
 		return dixiemeseconde / 36000
         + ":" + (dixiemeseconde / 6000) % 6 + (dixiemeseconde / 600) % 10
         + ":" + (dixiemeseconde / 100) % 6  + (dixiemeseconde / 10) % 10
         + ":" + dixiemeseconde % 10;
 
-	}	
+	}*/
+	
+	public int resultat(){
+		return (dixiemeseconde/10);
+	}
+	
+	public void reset(){
+		dixiemeseconde=0;
+	}
 
 }

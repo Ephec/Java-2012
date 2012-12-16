@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.InetAddress;
 
+import DEMINEUR.Chrono;
 import DEMINEUR.Scores;
 import DEMINEUR.TabDecouvertes;
 import DEMINEUR.TabDrapeaux;
@@ -74,13 +75,14 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	private Scores scores;
 	private NiveauPerso niveauPerso;
+	private boolean premierClic;
+	static Chrono chrono = new Chrono();
 
 	/**
 	 * 
 	 */
 	public Fenetre(){
 
-		
 		this.init();
 		this.setMenu();
 
@@ -89,7 +91,6 @@ public class Fenetre extends JFrame implements MouseListener {
 		this.add(details, BorderLayout.NORTH);
 		this.pack();
 		this.setVisible(true);
-
 	}
 
 	/**
@@ -105,7 +106,6 @@ public class Fenetre extends JFrame implements MouseListener {
 		details.setEditable(false);
 
 	}
-
 	/*
 	 * barre de menu
 	 */
@@ -170,6 +170,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	 */
 	public void setNiveau(int niveau){
 
+		// On set le niveau, la prochaine étape est donc le premier clic
 		switch (niveau) {
 		case 0:
 			this.nbLignes = NB_LIGNES_FACILE;
@@ -208,6 +209,7 @@ public class Fenetre extends JFrame implements MouseListener {
 	public void setGrille(){
 
 		this.remove(container);
+		premierClic=true;
 
 		container = new JPanel();
 		btnCase = new JButton[nbLignes][nbCols];
@@ -266,13 +268,14 @@ public class Fenetre extends JFrame implements MouseListener {
 		if(compteur == nbMines){
 
 			int reponse = - 1;
+			chrono.stop();
 			String[] action = {"Recommencer", "Quitter"};
 
-			String nom = (String) JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné ... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE,null,null,getComputerFullName());
+			String nom = (String) JOptionPane.showInputDialog(null, "Félicitations, vous avez gagné en "+chrono.resultat()+" secondes... \n\nQuel est votre nom ?", "Partie gagnée", JOptionPane.QUESTION_MESSAGE,null,null,getComputerFullName());
 			
 			if(nom!=null){
 				//System.out.println(""+nivActuel);
-				scores = new Scores(nom, nivActuel, 0);
+				scores = new Scores(nom, nivActuel, chrono.resultat());
 				scores.ecrireFichier();
 			}
 
@@ -306,7 +309,8 @@ public class Fenetre extends JFrame implements MouseListener {
 	public void partiePerdue() {
 
 		int reponse = -1;
-
+		chrono.stop();
+		
 		String[] action = {"Recommencer", "Quitter"};
 		while(reponse == -1){
 			decouvrirMines();
@@ -372,6 +376,12 @@ public class Fenetre extends JFrame implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		// recupère le clic (gauche ou droite)
 		int clic = e.getButton();
+		
+		if(premierClic){
+			chrono.reset();
+			chrono.start();
+			premierClic=false;
+		}
 
 		for(int i = 0; i < nbLignes; i++){
 			for(int j = 0; j < nbCols; j++){
@@ -413,7 +423,7 @@ public class Fenetre extends JFrame implements MouseListener {
 							drapeaux.setDrapeau(false, i, j);
 							nbMinesRest ++;
 						}
-						details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+" \n");
+						details.setText("\n  Lignes : "+nbLignes +" \n  Colonnes : "+nbCols+" \n  Mines : "+nbMinesRest+"\n");
 					}
 				}
 			}
