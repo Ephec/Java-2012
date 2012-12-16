@@ -366,7 +366,10 @@ public class Fenetre extends JFrame implements MouseListener {
 			for(int j=0;j<nbCols;j++){
 				if(mines.getMine(i,j)){
 					btnCase[i][j].setEnabled(false);
-					btnCase[i][j].setBackground(new java.awt.Color(255,0,0));
+					if (drapeaux.getDrapeau(i,j))
+						btnCase[i][j].setBackground(new java.awt.Color(0,255,0));
+					else
+						btnCase[i][j].setBackground(new java.awt.Color(255,0,0));
 					btnCase[i][j].setText("M");
 				}
 			}
