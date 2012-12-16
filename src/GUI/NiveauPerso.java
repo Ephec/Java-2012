@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -22,16 +23,21 @@ public class NiveauPerso extends JFrame{
 	private JTextField nbColsC = new JTextField();
 	private JTextField nbMinesC = new JTextField();
 	
-	private int nbLignes = 1;
-	private int nbCols = 1;
-	private int nbMines = 1;
-	
 	private JButton ok = new JButton("ok");
 	private JButton annuler = new JButton("Annuler");
 	
+	private int nbLignes;
+	private int nbCols;
+	private int nbMines;
 	
 	public NiveauPerso() {
 
+		initNivPerso();
+
+	}
+	
+	public void initNivPerso(){
+		
 		this.setTitle("Niveau personnalisé");
 		this.setMinimumSize(new Dimension(300, 200));
 		this.setLocationRelativeTo(null);
@@ -59,14 +65,13 @@ public class NiveauPerso extends JFrame{
 		boite.add(annuler);
 		
 		ok.addActionListener(new ActionListener(){
-			
 			public void actionPerformed(ActionEvent e) {
-				
-				Fenetre.setNbLignes(Integer.parseInt(nbLignesC.getText()));
-				Fenetre.setNbCols(Integer.parseInt(nbColsC.getText()));
-				Fenetre.setNbMines(Integer.parseInt(nbMinesC.getText()));
-				Fenetre f = new Fenetre();
-				dispose();
+				if(verifEntrees()){
+					creationNiv();
+					dispose();
+				}else{
+					JOptionPane.showMessageDialog(null, "Saisie non correcte ! \n- Max 50 Lignes ou Colonnes \n- Pas plus de mines que de cases", "Erreur", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}        
 		});
@@ -75,33 +80,26 @@ public class NiveauPerso extends JFrame{
 		this.setVisible(true);
 	}
 	
-	public void verifMines(){
+	public boolean verifEntrees(){
+		
+		nbLignes = Integer.parseInt(nbLignesC.getText());
+		nbCols = Integer.parseInt(nbColsC.getText());
+		nbMines = Integer.parseInt(nbMinesC.getText());
+		
+		if(nbMines < nbLignes * nbCols && nbLignes < 50 && nbCols < 50){
+			return true;
+		} else {		
+			return false;
+		}
+	}
+	
+	public void creationNiv() {
+		
+		Fenetre.setNbLignes(nbLignes);
+		Fenetre.setNbCols(nbCols);
+		Fenetre.setNbMines(nbMines);
+		Fenetre f = new Fenetre();
 		
 	}
 
-	public int getNbLignes() {
-		return nbLignes;
-	}
-
-	public void setNbLignes(int nbLignes) {
-		this.nbLignes = nbLignes;
-	}
-
-	public int getNbCols() {
-		return nbCols;
-	}
-
-	public void setNbCols(int nbCols) {
-		this.nbCols = nbCols;
-	}
-
-	public int getNbMines() {
-		return nbMines;
-	}
-
-	public void setNbMines(int nbMines) {
-		this.nbMines = nbMines;
-	}
-	
-	
 }
