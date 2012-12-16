@@ -478,6 +478,9 @@ public class Fenetre extends JFrame implements MouseListener {
 					if (clic == 3 && !decouvertes.getDecouverte(i, j)) { 
 						if (!drapeaux.getDrapeau(i, j)) { // ajout drapeau
 							btnCase[i][j].setText("D");
+							btnCase[i][j].setFont(new java.awt.Font("Arial",1,11));
+							btnCase[i][j].setForeground(new java.awt.Color(255,0,0));
+							btnCase[i][j].setBorder(BorderFactory.createCompoundBorder(new LineBorder(new java.awt.Color(150,150,150), 1, false), null));
 							drapeaux.setDrapeau(true, i, j);
 							nbMinesRest--;
 						} else {
