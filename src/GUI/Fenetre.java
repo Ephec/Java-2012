@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -11,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -52,15 +55,15 @@ public class Fenetre extends JFrame implements MouseListener {
 
 	public static int NB_LIGNES_FACILE = 10;
 	public static int NB_COLS_FACILE = 15;
-	public static int NB_MINES_FACILE = 3;
+	public static int NB_MINES_FACILE = 10;
 
 	public static int NB_LIGNES_MOYEN = 15;
 	public static int NB_COLS_MOYEN = 20;
-	public static int NB_MINES_MOYEN = 3;
+	public static int NB_MINES_MOYEN = 20;
 
 	public static int NB_LIGNES_DIF = 20;
 	public static int NB_COLS_DIF = 30;
-	public static int NB_MINES_DIF = 5;
+	public static int NB_MINES_DIF = 50;
 
 	private static int nbLignes = NB_LIGNES_FACILE;
 	private static int nbCols = NB_COLS_FACILE;
@@ -234,7 +237,7 @@ public class Fenetre extends JFrame implements MouseListener {
 			for (int j = 0; j < nbCols; j++) {
 				btnCase[i][j] = new JButton();
 				btnCase[i][j].setEnabled(true);
-				btnCase[i][j].setPreferredSize(new Dimension(45, 45));
+				btnCase[i][j].setPreferredSize(new Dimension(30, 30));
 				btnCase[i][j].addMouseListener(this);
 				container.add(btnCase[i][j]);
 
@@ -359,10 +362,13 @@ public class Fenetre extends JFrame implements MouseListener {
 	 * @param y
 	 */
 	public void decouvrirCase(int x, int y) {
+		
 		decouvertes.setDecouverte(true, x, y);
 		btnCase[x][y].setBackground(new java.awt.Color(190, 190, 190));
 		btnCase[x][y].setForeground(new java.awt.Color(0, 0, 0));
 		btnCase[x][y].setEnabled(false);
+		btnCase[x][y].setFont(new java.awt.Font("Arial",1,11));
+		btnCase[x][y].setBorder(BorderFactory.createCompoundBorder(new LineBorder(new java.awt.Color(150,150,150), 1, false), null));
 		if (nbre.getNbre(x, y) != 0)
 			btnCase[x][y].setText("" + nbre.getNbre(x, y));
 
@@ -417,6 +423,8 @@ public class Fenetre extends JFrame implements MouseListener {
 						btnCase[i][j].setBackground(new java.awt.Color(255, 0,
 								0));
 					btnCase[i][j].setText("M");
+					btnCase[i][j].setFont(new java.awt.Font("Arial",1,11));
+					btnCase[i][j].setBorder(BorderFactory.createCompoundBorder(new LineBorder(new java.awt.Color(150,150,150), 1, false), null));
 				}
 			}
 		}
@@ -439,13 +447,13 @@ public class Fenetre extends JFrame implements MouseListener {
 			for (int j = 0; j < nbCols; j++) {
 				if (e.getSource() == btnCase[i][j]) { // lie le clic à une case
 														// avec ses coordonnées
-					if (clic == 1) { // si clic gauche
+					if (clic == 1) { // clic gauche
 						if (!drapeaux.getDrapeau(i, j)) {
 							if (mines.getMine(i, j)) { // regarde si c'est une
 														// mine
 								partiePerdue();
 								break;
-							} else { // si non, indique les mines au alentours
+							} else { // indique les mines au alentours
 
 								int nbProxi = nbre.getNbre(i, j);
 
@@ -467,19 +475,9 @@ public class Fenetre extends JFrame implements MouseListener {
 							// complètement :p
 						}
 					}
-					if (clic == 3 && !decouvertes.getDecouverte(i, j)) { // si
-																			// clic
-																			// droit,
-																			// ajout
-																			// d'un
-																			// drapeau
-						if (!drapeaux.getDrapeau(i, j)) {
-							btnCase[i][j].setText("D"); // faut une solution car
-														// on peut cliquer
-														// plusieurs fois sur
-														// une meme case et meme
-														// si elle est disable
-														// :p
+					if (clic == 3 && !decouvertes.getDecouverte(i, j)) { 
+						if (!drapeaux.getDrapeau(i, j)) { // ajout drapeau
+							btnCase[i][j].setText("D");
 							drapeaux.setDrapeau(true, i, j);
 							nbMinesRest--;
 						} else {
