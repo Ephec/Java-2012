@@ -70,7 +70,7 @@ public class NiveauPerso extends JFrame{
 					creationNiv();
 					dispose();
 				}else{
-					JOptionPane.showMessageDialog(null, "Saisie non correcte ! \n- Max 50 Lignes ou Colonnes \n- Pas plus de mines que de cases", "Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Saisie non correcte ! \n- Max 50 lignes ou colonnes \n- Min 5 lignes ou colonnes \n- Pas plus de mines que de cases", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}        
@@ -86,7 +86,7 @@ public class NiveauPerso extends JFrame{
 		nbCols = Integer.parseInt(nbColsC.getText());
 		nbMines = Integer.parseInt(nbMinesC.getText());
 		
-		if(nbMines < nbLignes * nbCols && nbLignes < 50 && nbCols < 50){
+		if(nbMines < nbLignes * nbCols && nbLignes <= 50 && nbLignes >= 5 && nbCols <= 50 && nbCols >= 5){
 			return true;
 		} else {		
 			return false;
