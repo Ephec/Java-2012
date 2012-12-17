@@ -1,6 +1,11 @@
 package DEMINEUR;
 
+import java.io.IOException;
+
 import GUI.Fenetre;
+import RESEAU.Client;
+import RESEAU.Serveur;
+
 
 /**
  * Gère l'emplacement des mines dans un tableau
@@ -12,7 +17,7 @@ public class TabMines {
 	/*
 	 * Tableau 2D qui contient l'état des cases (booleen)
 	 */
-	private static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
+	public static boolean[][] mine = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 	
 	/**
 	 * Constructeur du tableau de mines

@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.net.InetAddress;
 
 import DEMINEUR.Chrono;
@@ -26,6 +27,8 @@ import DEMINEUR.TabDecouvertes;
 import DEMINEUR.TabDrapeaux;
 import DEMINEUR.TabMines;
 import DEMINEUR.TabProxi;
+import RESEAU.Client;
+import RESEAU.Serveur;
 
 /**
  * 
@@ -121,6 +124,20 @@ public class Fenetre extends JFrame implements MouseListener {
 				Niveau niveau = new Niveau();
 				nivActuel = niveau.getReponse();
 				setNiveau(nivActuel);
+			}
+		});
+		reseau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Serveur serveur;
+				Thread t;
+				
+				t = new Thread(serveur = new Serveur(2007));
+				t.start();
+				
+				
+				Client client = new Client(TabMines.mine);
+				
 			}
 		});
 		partie.add(nouvelle);
