@@ -1,4 +1,4 @@
-﻿#Java-2012 : Démnieur
+﻿#Java-2012 : Démineur
 
 Par **Antoine BETAS** et **Cédric BREMER** - 2 TL1 - Ephec Louvain-La-Neuve
 
