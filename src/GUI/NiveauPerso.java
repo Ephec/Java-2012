@@ -104,14 +104,14 @@ public class NiveauPerso extends JFrame{
 		} catch (NumberFormatException n) {
 			return false;
 		}
-		
+
 		if(nbMines < nbLignes * nbCols && nbLignes <= 50 && nbLignes >= 5 && nbCols <= 50 && nbCols >= 5){
 			return true;
 		} else {		
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Créer le niveau personnalisé au niveau de la fenêtre principale via ses getters
 	 */

@@ -15,7 +15,7 @@ public class Client extends Socket {
 	public Client(boolean[][] tab){
 		
 		try {
-			Client client = new Client("127.0.0.1",2007);
+			Client client = new Client("127.0.0.1",2012);
 			OutputStream os = client.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 			

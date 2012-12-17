@@ -11,15 +11,15 @@ import GUI.Fenetre;
 
 public class Serveur extends ServerSocket implements Runnable{
 	
-	public Serveur(int port) {
+	public Serveur(int port) throws IOException {
 		
 		super(port);
 		
 		try {
 			
 			Socket socket = this.accept();
-			InputStream is = socket.getInputStream();
-			ObjectInputStream ois = new ObjectInputStream(is);
+			//InputStream is = socket.getInputStream();
+			//ObjectInputStream ois = new ObjectInputStream(is);
 			
 			//boolean[][] tab = new boolean[Fenetre.getNbLignes()][Fenetre.getNbCols()];
 			
@@ -28,11 +28,11 @@ public class Serveur extends ServerSocket implements Runnable{
 			
 			
 			
-			System.out.println("IP du client : "+socket.getInetAddress());
+			/*System.out.println("IP du client : "+socket.getInetAddress());
 			System.out.println("Le port local : "+socket.getLocalPort());
 			System.out.println("L'autre port : "+socket.getPort());
 			System.out.println("Ip du serveur:"+socket.getLocalSocketAddress());
-			
+			*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

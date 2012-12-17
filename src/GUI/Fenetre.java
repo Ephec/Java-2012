@@ -128,16 +128,19 @@ public class Fenetre extends JFrame implements MouseListener {
 		});
 		reseau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Serveur serveur;
 				Thread t;
-				
-				t = new Thread(serveur = new Serveur(2007));
-				t.start();
-				
-				
-				Client client = new Client(TabMines.mine);
-				
+
+				try {
+					t = new Thread(serveur = new Serveur(2012));
+					t.start();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+				// Client client = new Client(TabMines.mine);
+
 			}
 		});
 		partie.add(nouvelle);
@@ -160,17 +163,14 @@ public class Fenetre extends JFrame implements MouseListener {
 		// Menu "?"
 		aide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,
-						"Cliquez sur les cases sans toucher les mines ...");
+				JOptionPane.showMessageDialog(null,"Cliquez sur les cases sans toucher les mines ...");
 			}
 		});
 		infos.add(aide);
 
 		apropos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane
-						.showMessageDialog(null,
-								"Démineur\nVersion : décembre 2012\nBy Antoine Betas & Cédric Bremer");
+				JOptionPane.showMessageDialog(null,"Démineur\nVersion : décembre 2012\nBy Antoine Betas & Cédric Bremer");
 			}
 		});
 		infos.add(apropos);
@@ -187,11 +187,11 @@ public class Fenetre extends JFrame implements MouseListener {
 	/**
 	 * @param niveau
 	 * 
-	 *            Un switch qui en fonction du nombre entier determine le
-	 *            niveau. Ce niveau sera passé en paramètre à la méthode qui
-	 *            créer le plateau. De plus, cette méthode retournera le niveau
-	 *            de la partie à la classe mère, Démineur ce qui permettra de
-	 *            générer le niveau pour les scores
+	 * Un switch qui en fonction du nombre entier determine le
+	 * niveau. Ce niveau sera passé en paramètre à la méthode qui
+	 * créer le plateau. De plus, cette méthode retournera le niveau
+	 * de la partie à la classe mère, Démineur ce qui permettra de
+	 * générer le niveau pour les scores
 	 */
 	public void setNiveau(int niveau) {
 
@@ -244,14 +244,11 @@ public class Fenetre extends JFrame implements MouseListener {
 		decouvertes = new TabDecouvertes();
 		drapeaux = new TabDrapeaux();
 
-		// mines.initMines(nbMines, nbLignes, nbCols);
-		// nbre.nbMinesCase(lignes, cols);
-		// decouvertes.initDecouvertes(nbLignes, nbCols);
-
 		container.setLayout(new GridLayout(nbLignes, nbCols));
 
 		for (int i = 0; i < nbLignes; i++) {
 			for (int j = 0; j < nbCols; j++) {
+
 				btnCase[i][j] = new JButton();
 				btnCase[i][j].setEnabled(true);
 				btnCase[i][j].setPreferredSize(new Dimension(30, 30));
@@ -285,6 +282,7 @@ public class Fenetre extends JFrame implements MouseListener {
 				}
 			}
 		}
+
 		if (nbNonDecouvertes == nbMines) {
 			for (int i = 0; i < nbLignes; i++) {
 				for (int j = 0; j < nbCols; j++) {
@@ -303,7 +301,7 @@ public class Fenetre extends JFrame implements MouseListener {
 
 			String nom = (String) JOptionPane.showInputDialog(null,
 					"Félicitations, vous avez gagné en " + chrono.resultat()
-							+ " secondes... \n\nQuel est votre nom ?",
+					+ " secondes... \n\nQuel est votre nom ?",
 					"Partie gagnée", JOptionPane.QUESTION_MESSAGE, null, null,
 					getComputerFullName());
 
@@ -379,13 +377,15 @@ public class Fenetre extends JFrame implements MouseListener {
 	 * @param y
 	 */
 	public void decouvrirCase(int x, int y) {
-		
+
 		decouvertes.setDecouverte(true, x, y);
 		btnCase[x][y].setBackground(new java.awt.Color(190, 190, 190));
 		btnCase[x][y].setForeground(new java.awt.Color(0, 0, 0));
 		btnCase[x][y].setEnabled(false);
-		btnCase[x][y].setFont(new java.awt.Font("Arial",1,11));
-		btnCase[x][y].setBorder(BorderFactory.createCompoundBorder(new LineBorder(new java.awt.Color(150,150,150), 1, false), null));
+		btnCase[x][y].setFont(new java.awt.Font("Arial", 1, 11));
+		btnCase[x][y].setBorder(BorderFactory.createCompoundBorder(
+				new LineBorder(new java.awt.Color(150, 150, 150), 1, false),
+				null));
 		if (nbre.getNbre(x, y) != 0)
 			btnCase[x][y].setText("" + nbre.getNbre(x, y));
 
@@ -410,12 +410,11 @@ public class Fenetre extends JFrame implements MouseListener {
 							decouvrirCase(x + i, y + j);
 							decouvrirAutour(x + i, y + j);
 						}
-						// else decouvrirAutour(x+i,y+j);
+						
 					}
 
 					else if (!decouvertes.getDecouverte(x + i, y + j)) {
-						// btnCase[x+i][y+j].setText(String.valueOf(nbre.getNbre(x+i,
-						// y+j)));
+						
 						if (!drapeaux.getDrapeau(x + i, y + j))
 							decouvrirCase(x + i, y + j);
 					}
@@ -440,8 +439,10 @@ public class Fenetre extends JFrame implements MouseListener {
 						btnCase[i][j].setBackground(new java.awt.Color(255, 0,
 								0));
 					btnCase[i][j].setText("M");
-					btnCase[i][j].setFont(new java.awt.Font("Arial",1,11));
-					btnCase[i][j].setBorder(BorderFactory.createCompoundBorder(new LineBorder(new java.awt.Color(150,150,150), 1, false), null));
+					btnCase[i][j].setFont(new java.awt.Font("Arial", 1, 11));
+					btnCase[i][j].setBorder(BorderFactory.createCompoundBorder(
+							new LineBorder(new java.awt.Color(150, 150, 150),
+									1, false), null));
 				}
 			}
 		}
@@ -463,11 +464,11 @@ public class Fenetre extends JFrame implements MouseListener {
 		for (int i = 0; i < nbLignes; i++) {
 			for (int j = 0; j < nbCols; j++) {
 				if (e.getSource() == btnCase[i][j]) { // lie le clic à une case
-														// avec ses coordonnées
+					// avec ses coordonnées
 					if (clic == 1) { // clic gauche
 						if (!drapeaux.getDrapeau(i, j)) {
 							if (mines.getMine(i, j)) { // regarde si c'est une
-														// mine
+								// mine
 								partiePerdue();
 								break;
 							} else { // indique les mines au alentours
@@ -481,23 +482,26 @@ public class Fenetre extends JFrame implements MouseListener {
 
 								} else {
 									decouvrirCase(i, j);
-									// btnCase[i][j].setText(""+nbre.getNbre(i,j));
+	
 								}
 
 								verifGagne();
 
 							}
-							// btnCase[i][j].setEnabled(false); // désactive les
-							// cases cliquée mais ca ne désactive pas
-							// complètement :p
+							
 						}
 					}
-					if (clic == 3 && !decouvertes.getDecouverte(i, j)) { 
+					if (clic == 3 && !decouvertes.getDecouverte(i, j)) {
 						if (!drapeaux.getDrapeau(i, j)) { // ajout drapeau
 							btnCase[i][j].setText("D");
-							btnCase[i][j].setFont(new java.awt.Font("Arial",1,11));
-							btnCase[i][j].setForeground(new java.awt.Color(255,0,0));
-							btnCase[i][j].setBorder(BorderFactory.createCompoundBorder(new LineBorder(new java.awt.Color(150,150,150), 1, false), null));
+							btnCase[i][j].setFont(new java.awt.Font("Arial", 1,
+									11));
+							btnCase[i][j].setForeground(new java.awt.Color(255,
+									0, 0));
+							btnCase[i][j].setBorder(BorderFactory
+									.createCompoundBorder(new LineBorder(
+											new java.awt.Color(150, 150, 150),
+											1, false), null));
 							drapeaux.setDrapeau(true, i, j);
 							nbMinesRest--;
 						} else {
