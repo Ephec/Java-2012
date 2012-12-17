@@ -1,0 +1,4 @@
+Avis perso Cédric
+
+Je suis fort satisfait d'être arrivé à un projet java fonctionnel,  puisque que je n'ai jamais utiliser ce langage auparavant.  Les seules difficultés qu'on a rencontrées étaient liées au Java lui-même avec cette notion d'objet qui était nouvelle pour nous ou encore la partie réseau. En revanche notre environnement de travail était parfait, nous avions un logiciel de contrôle de version, plusieurs systèmes d'exploitations et nos idées allaient dans le même sens. Notre démineur  correspond donc à nos attentes à part quelques petites choses qu'on aurait pu améliorer.
+Ce projet a été une bonne découverte de ce nouveau langage, mais je ne pense pas que je vais continuer à approfondir le Java, malgré sa notion d'objets qui  est un atout et que je ne retrouve pas dans les langages que je préfère utiliser.
