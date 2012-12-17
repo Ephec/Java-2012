@@ -4,7 +4,7 @@ Par **Antoine BETAS** et **Cédric BREMER** - 2 TL1 - Ephec Louvain-La-Neuve
 
 ## Congignes et échéances
 
-* Echéance sur ecampus : lundi 17 décembre 2012 à 23h59
+* Echéance sur ecampus : lundi 11 décembre 2012 à 11h15
 * Remettre l'UML ,le rapport, le fichier jar, le code ainsi que la javadoc
 * Défense du projet lors de l'examen : 9/1 à 8h45
 
